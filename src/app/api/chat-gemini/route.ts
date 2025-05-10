@@ -41,6 +41,52 @@ export async function POST(req: NextRequest) {
     }
 
     const clientHistory: { sender: string; text: string }[] = history || [];
+    
+    // --- BEGIN: Special message for "mohamed ehab" ---
+    if (message && message.toLowerCase().trim() === "mohamed ehab") {
+      // Check if the AI's last message was asking for the name
+      const lastAiMessage = clientHistory.length > 0 ? clientHistory[clientHistory.length - 1] : null;
+      if (lastAiMessage && lastAiMessage.sender === 'ai') {
+        const aiPromptLower = lastAiMessage.text.toLowerCase();
+        // Add more variations if needed
+        const namePrompts = ["what's your name?", "may i have your name?", "could you tell me your name?", "your name please?"];
+        if (namePrompts.some(prompt => aiPromptLower.includes(prompt))) {
+          return NextResponse.json({ 
+            reply: "a5oyyyyyya 3aaaml el ya s8er eh el 7alawa de give me ur email ya rgal" 
+          });
+        }
+      }
+    }
+    // --- END: Special message for "mohamed ehab" --- // Corrected comment to ehab
+
+    // --- BEGIN: Input Validation ---
+    const lastAiMessageForValidation = clientHistory.length > 0 ? clientHistory[clientHistory.length - 1] : null;
+    if (lastAiMessageForValidation && lastAiMessageForValidation.sender === 'ai') {
+      const aiPromptLower = lastAiMessageForValidation.text.toLowerCase();
+      const emailPrompts = ["email address", "what is your email?", "your email please"]; // Add more variations if needed
+      const namePromptsForValidation = ["what's your name?", "may i have your name?", "could you tell me your name?", "your name please?"];
+
+      // Check if AI was asking for an email
+      if (emailPrompts.some(prompt => aiPromptLower.includes(prompt))) {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(message)) {
+          return NextResponse.json({ 
+            reply: "That doesn't look like a valid email address. Could you please provide a correct email?" 
+          });
+        }
+      }
+      // Check if AI was asking for a name (and it wasn't handled by the "mohamed ehab" special case)
+      else if (namePromptsForValidation.some(prompt => aiPromptLower.includes(prompt)) && message.toLowerCase().trim() !== "mohamed ehab") {
+        // Basic name validation: not empty, not an email, doesn't contain numbers (simple version)
+        if (!message.trim() || /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(message) || /\d/.test(message)) {
+          return NextResponse.json({
+            reply: "That doesn't seem like a valid name. Please enter a typical name without numbers or special characters."
+          });
+        }
+      }
+    }
+    // --- END: Input Validation ---
+
     // Prepare history using the utility function
     // clientHistory (from req.json().history) is the conversation history *before* the current user's 'message'.
     // It should end with the AI's last turn (e.g., AI asking a question).
