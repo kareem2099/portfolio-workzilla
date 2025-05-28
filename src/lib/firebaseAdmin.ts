@@ -36,9 +36,8 @@ try {
 if (!admin.apps.length) {
   console.log('Firebase Admin: No existing Firebase apps, attempting to initialize...');
   try {
-    // Verify serviceAccount has required fields (check both camelCase and snake_case versions)
-    if (!(serviceAccount.projectId || serviceAccount.project_id) || 
-        !(serviceAccount.privateKey || serviceAccount.private_key)) {
+    // Verify serviceAccount has required fields
+    if (!serviceAccount.projectId || !serviceAccount.privateKey) {
       throw new Error('Invalid service account configuration - missing required projectId or privateKey fields');
     }
 
