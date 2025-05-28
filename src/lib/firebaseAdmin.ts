@@ -28,6 +28,7 @@ let serviceAccount: admin.ServiceAccount;
 try {
   serviceAccount = JSON.parse(serviceAccountJsonString);
   console.log('Firebase Admin: Service account JSON parsed successfully.');
+  console.log('Firebase Admin: Keys in parsed serviceAccount:', Object.keys(serviceAccount).join(', ')); // Log keys
 } catch { // 'e' removed as it's not used
   console.error('Firebase Admin: Failed to parse service account JSON.');
   throw new Error('Failed to parse Firebase service account JSON. Ensure the Base64 decoded string is valid JSON.');
@@ -36,14 +37,12 @@ try {
 if (!admin.apps.length) {
   console.log('Firebase Admin: No existing Firebase apps, attempting to initialize...');
   try {
-    // Verify serviceAccount has required fields
-    if (!serviceAccount.projectId || !serviceAccount.privateKey) {
-      throw new Error('Invalid service account configuration - missing required projectId or privateKey fields');
-    }
-
+    // The admin.credential.cert() and admin.initializeApp() will validate the serviceAccount.
+    // Our previous custom check was causing issues due to type vs. runtime key casing.
+    // The SDK is designed to handle service account JSONs which typically use snake_case.
     const app = admin.initializeApp({
-      credential: admin.credential.cert(serviceAccount),
-      projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+      credential: admin.credential.cert(serviceAccount), // Pass the parsed serviceAccount directly
+      projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID, // This is good practice
     });
     console.log('Firebase Admin: Successfully initialized app:', app.name);
   } catch (e: unknown) {
