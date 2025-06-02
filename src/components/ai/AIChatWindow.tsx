@@ -22,7 +22,7 @@ export default function AIChatWindow({ isOpen, onClose }: AIChatWindowProps) {
   useEffect(() => {
     if (isOpen && messages.length === 0) {
       setMessages([
-        { id: 'greet1', sender: 'ai', text: "Hi there! I'm Kareem's AI assistant. How can I help you today?" },
+        { id: 'greet1', sender: 'ai', text: "Hi there! I'm Mohamed's AI assistant. How can I help you today?" },
       ]);
     }
   }, [isOpen, messages.length]);

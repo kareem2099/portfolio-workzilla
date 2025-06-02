@@ -4,7 +4,7 @@ import { motion, Variants } from 'framer-motion';
 import Link from 'next/link';
 import { Eye, MessageSquare } from 'lucide-react'; // Removed ArrowRight
 
-const name = "Kareem Ehab";
+const name = "Mohamed Ehab";
 const role = "Full-Stack Developer";
 
 const nameChars = Array.from(name);

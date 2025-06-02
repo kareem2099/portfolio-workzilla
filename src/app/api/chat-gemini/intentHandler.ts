@@ -35,7 +35,7 @@ export function detectNavigationIntent(
           return NextResponse.json({ 
             action: "navigate", path: "/contact", 
             reply: "Great, taking you to the Contact page!",
-            postNavigationPrompt: "We're on the Contact page. Here you'll find a form to send Kareem a message directly by providing your full name, email address, and your message."
+            postNavigationPrompt: "We're on the Contact page. Here you'll find a form to send Mohamed a message directly by providing your full name, email address, and your message."
           } as NavigationAction);
         } else if (lastAiText.includes("about page")) {
           return NextResponse.json({ 
@@ -47,7 +47,7 @@ export function detectNavigationIntent(
           return NextResponse.json({ 
             action: "navigate", path: "/projects", 
             reply: "Great, taking you to the Projects page!",
-            postNavigationPrompt: "Now that we're on the Projects page, what specifically would you like to know about Kareem's work?"
+            postNavigationPrompt: "Now that we're on the Projects page, what specifically would you like to know about Mohamed's work?"
           } as NavigationAction);
         } else if (lastAiText.includes("home page") || lastAiText.includes("main portfolio page")) {
           return NextResponse.json({ 
@@ -63,7 +63,7 @@ export function detectNavigationIntent(
   }
 
   // 2. Check for explicit navigation intents (if not a "yes" to a prior offer)
-  const aboutKeywords = ["about", "bio", "background", "who is kareem"];
+  const aboutKeywords = ["about", "bio", "background", "who is Mohamed"];
   const projectKeywords = ["projects", "work", "portfolio", "creations", "apps"];
   const contactKeywords = ["contact", "reach out", "email", "message", "connect"];
   const homeKeywords = ["home", "main page", "start page"];
@@ -94,28 +94,28 @@ export function detectNavigationIntent(
     return NextResponse.json({ 
       action: "navigate", path: "/about", 
       reply: "Okay, let's go to the About page so you can see what it contains.",
-      postNavigationPrompt: "We're on the About page. Here you can learn more about Kareem's journey, skills, and experience." // Made this more descriptive
+      postNavigationPrompt: "We're on the About page. Here you can learn more about Mohamed's journey, skills, and experience." // Made this more descriptive
     } as NavigationAction);
   }
   if (checkIntent(userMessageLower, projectKeywords, actionKeywords)) {
     return NextResponse.json({ 
       action: "navigate", path: "/projects", 
-      reply: "Sure, let's head over to the Projects page to see Kareem's work!",
-      postNavigationPrompt: "Now that we're on the Projects page, you can explore various projects Kareem has worked on, with details for each." // Made this more descriptive
+      reply: "Sure, let's head over to the Projects page to see Mohamed's work!",
+      postNavigationPrompt: "Now that we're on the Projects page, you can explore various projects Mohamed has worked on, with details for each." // Made this more descriptive
     } as NavigationAction);
   }
   if (checkIntent(userMessageLower, contactKeywords, actionKeywords)) {
     return NextResponse.json({ 
       action: "navigate", path: "/contact",
-      reply: "Okay, I'll take you to the Contact page where you can find Kareem's contact details.",
-      postNavigationPrompt: "We're on the Contact page. Here you'll find a form to send Kareem a message directly by providing your full name, email address, and your message."
+      reply: "Okay, I'll take you to the Contact page where you can find Mohamed's contact details.",
+      postNavigationPrompt: "We're on the Contact page. Here you'll find a form to send Mohamed a message directly by providing your full name, email address, and your message."
     } as NavigationAction);
   }
   if (checkIntent(userMessageLower, homeKeywords, actionKeywords)) {
     return NextResponse.json({ 
       action: "navigate", path: "/", 
       reply: "Okay, let's go to the Home page.",
-      postNavigationPrompt: "We're on the Home page. Here you'll typically find an introduction to Kareem, highlights of his skills and projects, and ways to explore more of the portfolio."
+      postNavigationPrompt: "We're on the Home page. Here you'll typically find an introduction to Mohamed, highlights of his skills and projects, and ways to explore more of the portfolio."
     } as NavigationAction);
   }
 
@@ -128,7 +128,7 @@ export function detectNavigationIntent(
         return NextResponse.json({ 
           action: "navigate", path: "/projects", 
           reply: "Okay, navigating to the Projects page as you asked!",
-          postNavigationPrompt: "Now that we're on the Projects page, what specifically would you like to know about Kareem's work?"
+          postNavigationPrompt: "Now that we're on the Projects page, what specifically would you like to know about Mohamed's work?"
         } as NavigationAction);
       } else if (lastAiText.includes("about page")) {
         return NextResponse.json({ 
@@ -140,7 +140,7 @@ export function detectNavigationIntent(
         return NextResponse.json({ 
           action: "navigate", path: "/contact", 
           reply: "Okay, navigating to the Contact page as you asked!",
-          postNavigationPrompt: "We're on the Contact page. Here you'll find a form to send Kareem a message directly by providing your full name, email address, and your message."
+          postNavigationPrompt: "We're on the Contact page. Here you'll find a form to send Mohamed a message directly by providing your full name, email address, and your message."
         } as NavigationAction);
       }
     }

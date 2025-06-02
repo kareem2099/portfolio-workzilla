@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { User, MessageSquare } from 'lucide-react';
 
-const name = "Kareem Ehab";
+const name = "Mohamed Ehab";
 const nameChars = Array.from(name);
 
 const nameContainerVariants = {

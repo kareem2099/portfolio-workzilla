@@ -129,7 +129,7 @@ export default function ContactForm({ variants = itemVariants }: ContactFormProp
                 whileFocus="focus"
                 onBlurCapture={() => { /* Trigger blur variant if needed, though whileFocus handles reversal */ }}
                 className={`w-full px-4 py-3 bg-slate-100 dark:bg-slate-700/50 border ${errors.name ? 'border-red-500 dark:border-red-500' : 'border-slate-300 dark:border-slate-600'} rounded-lg text-slate-900 dark:text-slate-100 focus:ring-0 focus:outline-none transition-colors duration-300 placeholder-slate-400 dark:placeholder-slate-500`}
-                placeholder="Kareem Ehab"
+                placeholder="Mohamed Ehab"
               />
               <AnimatePresence>
                 {errors.name && <motion.p variants={errorTextVariants} initial="initial" animate="animate" exit="exit" className="text-red-500 dark:text-red-400 text-xs mt-1">{errors.name}</motion.p>}

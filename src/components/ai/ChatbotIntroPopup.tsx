@@ -48,9 +48,9 @@ export default function ChatbotIntroPopup({ isVisible, onClose }: ChatbotIntroPo
           <div className="flex items-start">
             <MessageSquarePlus size={24} className="text-pink-400 dark:text-pink-500 mr-3 mt-1 flex-shrink-0" />
             <div>
-              <p className="text-sm font-semibold mb-1">Kareem&apos;s AI Assistant</p>
+              <p className="text-sm font-semibold mb-1">Mohamed&apos;s AI Assistant</p>
               <p className="text-xs text-slate-200 dark:text-slate-300">
-                Hi there! I am Kareem&apos;s AI. Press the chat icon below to get assistance!
+                Hi there! I am Mohamed&apos;s AI. Press the chat icon below to get assistance!
               </p>
             </div>
           </div>
