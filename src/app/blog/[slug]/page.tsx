@@ -56,15 +56,14 @@ interface PostPageProps {
   }
 }
 
-export default function BlogPostPage({ params }: PostPageProps) {
-  const post = getPostBySlug(params.slug);
+export default async function BlogPostPage({ params }: Promise<PostPageProps>) {
+  const { slug } = await params;
+  const post = getPostBySlug(slug);
 
   if (!post) {
-    notFound(); // Triggers the 404 page
+    notFound();
   }
 
-  // The Post type should be implicitly handled by getPostBySlug, 
-  // or we can define it here if needed for clarity for the 'post' variable.
-  // For now, assuming 'post' is correctly typed from getPostBySlug.
   return <BlogPostPageClient post={post} />;
 }
+
