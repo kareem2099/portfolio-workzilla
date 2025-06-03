@@ -50,7 +50,13 @@ const getPostBySlug = (slug: string) => {
 // Removed pageVariants and articleVariants definitions
 
 // Changed component definition to a direct function (removed async)
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
+interface PostPageProps {
+  params: {
+    slug: string
+  }
+}
+
+export default function BlogPostPage({ params }: PostPageProps) {
   const post = getPostBySlug(params.slug);
 
   if (!post) {
