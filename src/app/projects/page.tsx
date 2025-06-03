@@ -1,49 +1,60 @@
 'use client';
 
-import { motion, Variants } from 'framer-motion';
-import ProjectCard, { Project } from '@/components/projects/ProjectCard'; // Assuming ProjectCard is in this path
+import { useState } from 'react';
+import { motion, Variants, AnimatePresence } from 'framer-motion';
+import ProjectCard, { Project } from '@/components/projects/ProjectCard';
 
 // Placeholder project data
 const placeholderProjects: Project[] = [
   {
     id: '1',
-    title: 'E-commerce Platform X',
-    description: 'A full-featured e-commerce platform with advanced product filtering, user accounts, and a streamlined checkout process.',
-    imageUrl: '/assets/project-placeholder-1.png', // Replace with actual or better placeholders
-    techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Stripe', 'Sanity.io'],
-    liveLink: '#',
-    codeLink: '#',
-    category: 'Web App',
+    title: 'Wood Line Market',
+    description: 'An online marketplace for wood products, built with HTML, CSS, JavaScript, Node.js, and ASP.NET.',
+    imageUrl: '/assets/project-placeholder-1.png',
+    techStack: ['HTML', 'CSS', 'JavaScript', 'Node.js', 'ASP.NET'],
+    liveLink: 'https://wood-line-web.vercel.app/',
+    codeLink: 'https://github.com/kareem2099/WoodLine.Web',
+    category: 'E-commerce',
   },
   {
     id: '2',
-    title: 'Portfolio Website v2',
-    description: 'My personal portfolio showcasing skills and projects, built with a focus on performance and modern design principles.',
+    title: 'Rose & Gold E-commerce',
+    description: 'A full-featured e-commerce website for jewelry, built with PHP and SQLite, and containerized with Docker.',
     imageUrl: '/assets/project-placeholder-2.png',
-    techStack: ['Next.js', 'Framer Motion', 'Tailwind CSS', 'TypeScript'],
+    techStack: ['PHP', 'SQLite', 'Docker', 'Apache', 'HTML', 'CSS', 'JavaScript'],
     liveLink: '#',
-    // codeLink: '#', // Optional
-    category: 'Website',
+    codeLink: 'https://github.com/kareem2099/RoseAndGold',
+    category: 'E-commerce',
   },
   {
     id: '3',
-    title: 'Mobile Task Manager',
-    description: 'A cross-platform mobile application for task management, featuring offline support and cloud synchronization.',
+    title: 'Lambo Site',
+    description: 'A showcase website for Lambo.',
     imageUrl: '/assets/project-placeholder-3.png',
-    techStack: ['Flutter', 'Dart', 'Firebase', 'Riverpod'],
-    // liveLink: '#', // Optional
-    codeLink: '#',
-    category: 'Mobile App',
+    techStack: ['HTML', 'CSS', 'JavaScript'],
+    liveLink: 'https://lambo-website.vercel.app/',
+    codeLink: 'https://github.com/kareem2099/lambo-website',
+    category: 'Website',
   },
   {
     id: '4',
-    title: 'Data Visualization Dashboard',
-    description: 'An interactive dashboard for visualizing complex datasets, providing insights through charts and graphs.',
+    title: 'Pisa Prep',
+    description: 'A preparatory platform for Pisa.',
     imageUrl: '/assets/project-placeholder-4.png',
-    techStack: ['React', 'D3.js', 'Node.js', 'Express'],
-    liveLink: '#',
-    codeLink: '#',
-    category: 'Web App',
+    techStack: ['HTML', 'CSS', 'JavaScript'],
+    liveLink: 'https://pisa-prep.vercel.app/',
+    codeLink: 'https://github.com/kareem2099/PisaPrep--2-',
+    category: 'Website',
+  },
+  {
+    id: '5',
+    title: 'Personal Portfolio Website',
+    description: "The Next.js & Tailwind CSS portfolio you're currently viewing, showcasing my skills and projects.",
+    imageUrl: '/assets/project-placeholder-5.png', // Using an available placeholder
+    techStack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'Vercel'],
+    liveLink: 'https://portfolio-workzilla.vercel.app/',
+    codeLink: 'https://github.com/kareem2099/portfolio-workzilla',
+    category: 'Portfolio',
   },
 ];
 
@@ -52,7 +63,7 @@ const pageContainerVariants: Variants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.15, // Stagger animation of title and then the grid
+      staggerChildren: 0.15,
     },
   },
 };
@@ -60,7 +71,7 @@ const pageContainerVariants: Variants = {
 const titleText = "My Creative Works";
 const titleChars = Array.from(titleText);
 
-const titleContainerAnimVariants: Variants = { // For the h1 container
+const titleContainerAnimVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -68,7 +79,7 @@ const titleContainerAnimVariants: Variants = { // For the h1 container
   },
 };
 
-const titleCharAnimVariants: Variants = { // For each character
+const titleCharAnimVariants: Variants = {
   hidden: { opacity: 0, x: -20, y:10, rotateZ: -15, filter: "blur(5px)" },
   visible: {
     opacity: 1,
@@ -86,17 +97,40 @@ const gridVariants: Variants = {
   visible: {
     opacity: 1,
     transition: {
-      staggerChildren: 0.2, // Stagger animation of each project card
-      delayChildren: 0.2, // Delay after title has animated
+      staggerChildren: 0.2,
+      delayChildren: 0.2,
     },
   },
 };
 
 
+const filterButtonContainerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.1, delayChildren: 0.5 },
+  },
+};
+
+const filterButtonVariants: Variants = {
+  hidden: { opacity: 0, y: -10 },
+  visible: { opacity: 1, y: 0 },
+  hover: { scale: 1.05 },
+  tap: { scale: 0.95 }
+};
+
 export default function ProjectsPage() {
+  const [selectedCategory, setSelectedCategory] = useState<string>('All');
+
+  const categories = ['All', ...new Set(placeholderProjects.map(p => p.category).filter((value): value is string => Boolean(value)))];
+
+  const filteredProjects = selectedCategory === 'All'
+    ? placeholderProjects
+    : placeholderProjects.filter(project => project.category === selectedCategory);
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800 dark:bg-gradient-to-br dark:from-slate-900 dark:via-purple-950 dark:to-slate-900 dark:text-slate-100 py-16 px-4 sm:px-6 lg:px-8">
-      <motion.div 
+      <motion.div
         className="container mx-auto"
         variants={pageContainerVariants}
         initial="hidden"
@@ -111,26 +145,62 @@ export default function ProjectsPage() {
             <motion.span
               key={index}
               variants={titleCharAnimVariants}
-              className={`inline-block ${char === ' ' ? 'mx-1 sm:mx-2' : ''}`} // Gradient is on parent h1
+              className={`inline-block ${char === ' ' ? 'mx-1 sm:mx-2' : ''}`}
             >
               {char}
             </motion.span>
           ))}
         </motion.h1>
 
-        {placeholderProjects.length > 0 ? (
-          <motion.div 
-            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10"
-            variants={gridVariants}
-            // initial & animate are handled by pageContainerVariants' staggerChildren
-          >
-            {placeholderProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} /> // cardVariants are default in ProjectCard
-            ))}
-          </motion.div>
-        ) : (
-          <motion.p 
-            className="text-center text-xl text-slate-500 dark:text-slate-400"
+        <motion.div 
+          className="flex flex-wrap justify-center gap-3 sm:gap-4 mb-12 md:mb-16"
+          variants={filterButtonContainerVariants}
+        >
+          {categories.map((category) => (
+            <motion.button
+              key={category}
+              onClick={() => setSelectedCategory(category)}
+              className={`px-4 py-2 sm:px-5 sm:py-2.5 text-sm sm:text-base font-medium rounded-lg transition-all duration-200 ease-out
+                ${selectedCategory === category 
+                  ? 'bg-pink-600 text-white shadow-lg scale-105' 
+                  : 'bg-white dark:bg-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-600 shadow'
+                }`}
+              variants={filterButtonVariants}
+              whileHover="hover"
+              whileTap="tap"
+            >
+              {category}
+            </motion.button>
+          ))}
+        </motion.div>
+
+        <AnimatePresence mode="wait">
+          {filteredProjects.length > 0 ? (
+            <motion.div
+              key={selectedCategory}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10"
+              variants={gridVariants}
+              initial="hidden"
+              animate="visible"
+              exit={{ opacity: 0 }}
+            >
+              {filteredProjects.map((project) => (
+                <motion.div
+                  key={project.id}
+                  layout
+                  initial={{ opacity: 0, y: 20, scale: 0.9 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: -20, scale: 0.9 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                >
+                  <ProjectCard project={project} />
+                </motion.div>
+              ))}
+            </motion.div>
+          ) : (
+            <motion.p
+              key="no-projects-message"
+              className="text-center text-xl text-slate-500 dark:text-slate-400"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
@@ -138,6 +208,7 @@ export default function ProjectsPage() {
             More projects coming soon! Stay tuned.
           </motion.p>
         )}
+        </AnimatePresence>
       </motion.div>
     </div>
   );

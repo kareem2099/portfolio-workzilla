@@ -5,6 +5,7 @@ import HeroSection from '@/components/home/HeroSection';
 import AboutSnippetSection from '@/components/home/AboutSnippetSection';
 import FeaturedProjectsSection from '@/components/home/FeaturedProjectsSection';
 import SkillsHighlightSection from '@/components/home/SkillsHighlightSection';
+import LatestBlogPostsSection from '@/components/home/LatestBlogPostsSection'; // Import the new section
 
 // Overall page container variants for staggering sections if needed,
 // though individual sections also have their own entry animations.
@@ -33,6 +34,7 @@ export default function Home() {
       <AboutSnippetSection />
       <FeaturedProjectsSection />
       <SkillsHighlightSection />
+      <LatestBlogPostsSection /> {/* Add the new section here */}
 
       {/* Optional: A final Call To Action or Footer specific to home might go here */}
       {/* For now, the global footer from layout.tsx will apply */}

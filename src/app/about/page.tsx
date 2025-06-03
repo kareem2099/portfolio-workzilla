@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import HeroSection from '@/components/about/HeroSection';
 import JourneySection from '@/components/about/JourneySection';
 import SkillsSection from '@/components/about/SkillsSection';
+import ValuesSection from '@/components/about/ValuesSection'; // Import the new section
 import CallToActionSection from '@/components/about/CallToActionSection';
 
 // Animation variants for the main container and individual sections
@@ -38,6 +39,7 @@ export default function AboutPage() {
         <HeroSection variants={itemVariants} />
         <JourneySection variants={itemVariants} />
         <SkillsSection variants={itemVariants} />
+        <ValuesSection variants={itemVariants} /> {/* Add the new section here */}
         <CallToActionSection variants={itemVariants} />
       </motion.div>
     </div>

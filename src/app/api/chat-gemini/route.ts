@@ -106,7 +106,7 @@ export async function POST(req: NextRequest) {
     // If no navigation intent matched, proceed with Gemini text generation
     const chat = model.startChat({
       history: historyForGemini, // Use history prepared for Gemini
-      generationConfig: { maxOutputTokens: 350 }, 
+      generationConfig: { maxOutputTokens: 1500 }, // Increased maxOutputTokens
       safetySettings: safetySettings, // Use imported settings
     });
     const result = await chat.sendMessage(message); 
