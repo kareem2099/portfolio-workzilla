@@ -55,7 +55,8 @@ const getPostBySlug = (slug: string) => {
 
 // Removed pageVariants and articleVariants definitions
 
-const BlogPostPage: React.FC<PostPageProps> = async ({ params }) => {
+// Changed component definition to a direct async function
+export default async function BlogPostPage({ params }: PostPageProps) {
   const post = getPostBySlug(params.slug);
 
   if (!post) {
@@ -66,6 +67,4 @@ const BlogPostPage: React.FC<PostPageProps> = async ({ params }) => {
   // or we can define it here if needed for clarity for the 'post' variable.
   // For now, assuming 'post' is correctly typed from getPostBySlug.
   return <BlogPostPageClient post={post} />;
-};
-
-export default BlogPostPage;
+}
