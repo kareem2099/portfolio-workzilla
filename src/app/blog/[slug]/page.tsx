@@ -56,7 +56,7 @@ interface PostPageProps {
   }
 }
 
-export default async function BlogPostPage({ params }: Promise<PostPageProps>) {
+export default async function BlogPostPage({ params }: PostPageProps) {
   const { slug } = await params;
   const post = getPostBySlug(slug);
 
