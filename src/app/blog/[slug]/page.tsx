@@ -47,12 +47,11 @@ const getPostBySlug = (slug: string) => {
 
 // FIXED: Updated interface for Next.js 15
 interface PostPageProps {
-  params: Promise<{ slug: string }>; // Changed from { slug: string } to Promise<{ slug: string }>
+  params: { slug: string }; // ✅ plain object, not a Promise
 }
 
-// FIXED: Made component async and await params
 export default async function BlogPostPage({ params }: PostPageProps) {
-  const { slug } = await params; // Await the params Promise
+  const { slug } = params; // ✅ No await
   const post = getPostBySlug(slug);
 
   if (!post) {
@@ -62,11 +61,10 @@ export default async function BlogPostPage({ params }: PostPageProps) {
   return <BlogPostPageClient post={post} />;
 }
 
-// FIXED: If you have generateMetadata, update it too
 export async function generateMetadata({ params }: PostPageProps) {
-  const { slug } = await params; // Await params here too
+  const { slug } = params; // ✅ No await
   const post = getPostBySlug(slug);
-  
+
   if (!post) {
     return {
       title: 'Post Not Found',
