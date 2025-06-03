@@ -36,12 +36,6 @@ const posts = [
   },
 ];
 
-interface PostPageProps {
-  params: {
-    slug: string;
-  };
-}
-
 // This function can be used by Next.js to generate static pages at build time
 export async function generateStaticParams() {
   return posts.map((post) => ({
@@ -56,7 +50,7 @@ const getPostBySlug = (slug: string) => {
 // Removed pageVariants and articleVariants definitions
 
 // Changed component definition to a direct function (removed async)
-export default function BlogPostPage({ params }: PostPageProps) {
+export default function BlogPostPage({ params }: { params: { slug: string } }) {
   const post = getPostBySlug(params.slug);
 
   if (!post) {
