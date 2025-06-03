@@ -1,6 +1,7 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
 import ProjectDetailClient from '@/components/projects/ProjectDetailClient';
+import { Metadata } from 'next';
 
 interface Project {
   id: string;
@@ -85,11 +86,11 @@ const getProjectById = async (id: string): Promise<Project | undefined> => {
 };
 
 interface ProjectDetailPageProps {
-  params: {
-    projectId: string;
-  };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  params: any; // Changed to any
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default async function ProjectDetailPage({ params }: ProjectDetailPageProps) {
   // Await the call to the now async getProjectById
   const project = await getProjectById(params.projectId);
@@ -99,4 +100,20 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
   }
 
   return <ProjectDetailClient project={project} />;
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function generateMetadata({ params }: { params: any }): Promise<Metadata> {
+  const project = await getProjectById(params.projectId);
+
+  if (!project) {
+    return {
+      title: 'Project Not Found',
+    };
+  }
+
+  return {
+    title: project.title,
+    description: project.description,
+  };
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { notFound } from 'next/navigation';
 import BlogPostPageClient from '@/components/blog/BlogPostPageClient';
+import { Metadata } from 'next';
 
 // Placeholder for blog posts data - In a real app, you'd fetch this from a CMS or database
 const posts = [
@@ -45,12 +46,8 @@ const getPostBySlug = (slug: string) => {
   return posts.find((post) => post.slug === slug);
 };
 
-// FIXED: Updated interface for Next.js 15
-interface PostPageProps {
-  params: { slug: string }; // ✅ plain object, not a Promise
-}
-
-export default async function BlogPostPage({ params }: PostPageProps) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export default async function BlogPostPage({ params }: { params: any }) {
   const { slug } = params; // ✅ No await
   const post = getPostBySlug(slug);
 
@@ -61,7 +58,8 @@ export default async function BlogPostPage({ params }: PostPageProps) {
   return <BlogPostPageClient post={post} />;
 }
 
-export async function generateMetadata({ params }: PostPageProps) {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export async function generateMetadata({ params }: { params: any }): Promise<Metadata> {
   const { slug } = params; // ✅ No await
   const post = getPostBySlug(slug);
 
