@@ -1,8 +1,6 @@
 import React from 'react';
-// Link import removed as it's no longer used in this server component
 import { notFound } from 'next/navigation';
-import BlogPostPageClient from '@/components/blog/BlogPostPageClient'; // Import the new client component
-// Removed motion and Variants from framer-motion
+import BlogPostPageClient from '@/components/blog/BlogPostPageClient';
 
 // Placeholder for blog posts data - In a real app, you'd fetch this from a CMS or database
 const posts = [
@@ -47,17 +45,14 @@ const getPostBySlug = (slug: string) => {
   return posts.find((post) => post.slug === slug);
 };
 
-// Removed pageVariants and articleVariants definitions
-
-// Changed component definition to a direct function (removed async)
+// FIXED: Updated interface for Next.js 15
 interface PostPageProps {
-  params: {
-    slug: string
-  }
+  params: Promise<{ slug: string }>; // Changed from { slug: string } to Promise<{ slug: string }>
 }
 
+// FIXED: Made component async and await params
 export default async function BlogPostPage({ params }: PostPageProps) {
-  const { slug } = await params;
+  const { slug } = await params; // Await the params Promise
   const post = getPostBySlug(slug);
 
   if (!post) {
@@ -67,3 +62,19 @@ export default async function BlogPostPage({ params }: PostPageProps) {
   return <BlogPostPageClient post={post} />;
 }
 
+// FIXED: If you have generateMetadata, update it too
+export async function generateMetadata({ params }: PostPageProps) {
+  const { slug } = await params; // Await params here too
+  const post = getPostBySlug(slug);
+  
+  if (!post) {
+    return {
+      title: 'Post Not Found',
+    };
+  }
+
+  return {
+    title: post.title,
+    description: post.excerpt,
+  };
+}
