@@ -6,7 +6,7 @@ import Header from "@/components/Header";
 import ThemeProvider from "@/components/ThemeProvider";
 import AIChatController from "@/components/ai/AIChatController"; // Import AIChatController
 import { NextIntlClientProvider } from 'next-intl';
-import getMessages from '../../../i18n';
+import { getMessages } from 'next-intl/server'; // Use the correct import from next-intl
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,12 +34,10 @@ export default async function RootLayout({
 }>) {
   const resolvedParams = await params;
   const locale = await getValidLocale(resolvedParams.locale);
-  const { messages } = await getMessages({ locale });
   
-  // Set cookie for locale
-  if (typeof window !== 'undefined') {
-    document.cookie = `NEXT_LOCALE=${locale};path=/`;
-  }
+  // Fix: Pass locale directly as a string, not as an object
+  const messages = await getMessages({ locale });
+
   return (
     <html lang={locale} dir={locale === 'ar' ? 'rtl' : 'ltr'}>
       <body
