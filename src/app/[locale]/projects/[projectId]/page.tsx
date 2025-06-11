@@ -72,6 +72,17 @@ const placeholderProjects: Project[] = [
     category: 'Portfolio',
     detailedContent: `<h3>Project Overview</h3><p>This is the very portfolio website you are currently exploring! It's designed to showcase my skills, journey, and the projects I've worked on in a clean, modern, and interactive way.</p><h3>Key Features & Technologies</h3><p>Built with Next.js for server-side rendering and static site generation, ensuring optimal performance and SEO. Styled with Tailwind CSS for a utility-first approach to design. Interactive elements and animations are powered by Framer Motion. The codebase is written in TypeScript for type safety and improved developer experience. Hosted on Vercel.</p>`
   },
+  {
+    id: '6',
+    title: 'Premium Agency Bot Website',
+    description: 'A modern, interactive single-page website for an HR agency, featuring AI technologies and Telegram bot integration for contact forms.',
+    imageUrl: '/assets/project-placeholder-6.png',
+    techStack: ['HTML', 'CSS', 'JavaScript', 'Telegram Bot API'],
+    liveLink: 'https://premium-agency-bot.vercel.app/',
+    codeLink: 'https://github.com/kareem2099/premium-agency-bot',
+    category: 'Web App / Bot Integration',
+    detailedContent: `<h3>Project Overview</h3><p>This project is a comprehensive single-page website designed for a premium HR agency, showcasing their services and AI-driven recruitment technologies. It features a modern design, rich animations, and interactive elements.</p><h3>Key Features & Technologies</h3><p>The website is built using pure HTML, CSS, and JavaScript, demonstrating strong front-end development skills. It includes smooth scrolling, scroll-triggered animations, a dynamic testimonial slider, and a robust contact form with client-side validation. A unique aspect is its integration with the Telegram Bot API for form submissions. <strong>Note: The original implementation of the Telegram bot integration had a security vulnerability (exposed API token). For a production environment, this would be refactored to use a secure server-side endpoint.</strong></p>`
+  },
 ];
 
 export async function generateStaticParams() {

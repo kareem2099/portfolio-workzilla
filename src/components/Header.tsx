@@ -27,6 +27,7 @@ export default function Header({ locale = 'en' }: { locale?: string }) {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State for mobile menu
+  const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false); // State for language dropdown
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
@@ -141,32 +142,46 @@ export default function Header({ locale = 'en' }: { locale?: string }) {
           </motion.nav>
           {/* Right side items: Theme Toggle and Mobile Menu Button */}
           <div className="flex items-center gap-2">
-            <div className="relative group">
-              <button className="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700">
+            <div className="relative">
+              <button 
+                onClick={() => setIsLanguageDropdownOpen(!isLanguageDropdownOpen)}
+                className="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700"
+                aria-label="Select language"
+              >
                 <Globe size={20} />
               </button>
-              <div className="absolute right-0 mt-2 w-32 origin-top-right rounded-md bg-white dark:bg-slate-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50">
-                <div className="py-1">
-                  <button 
-                    onClick={() => router.push(`/en${pathname.replace(/^\/(en|ru|ar)/, '')}`)}
-                    className="block w-full text-left px-4 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700"
+              <AnimatePresence>
+                {isLanguageDropdownOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute right-0 mt-2 w-32 origin-top-right rounded-md bg-white dark:bg-slate-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none z-50"
                   >
-                    {t('common.languages.en', locale)}
-                  </button>
-                  <button 
-                    onClick={() => router.push(`/ru${pathname.replace(/^\/(en|ru|ar)/, '')}`)}
-                    className="block w-full text-left px-4 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700"
-                  >
-                    {t('common.languages.ru', locale)}
-                  </button>
-                  <button 
-                    onClick={() => router.push(`/ar${pathname.replace(/^\/(en|ru|ar)/, '')}`)}
-                    className="block w-full text-left px-4 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700"
-                  >
-                    {t('common.languages.ar', locale)}
-                  </button>
-                </div>
-              </div>
+                    <div className="py-1">
+                      <button 
+                        onClick={() => { router.push(`/en${pathname.replace(/^\/(en|ru|ar)/, '')}`); setIsLanguageDropdownOpen(false); }}
+                        className="block w-full text-left px-4 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700"
+                      >
+                        {t('common.languages.en', locale)}
+                      </button>
+                      <button 
+                        onClick={() => { router.push(`/ru${pathname.replace(/^\/(en|ru|ar)/, '')}`); setIsLanguageDropdownOpen(false); }}
+                        className="block w-full text-left px-4 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700"
+                      >
+                        {t('common.languages.ru', locale)}
+                      </button>
+                      <button 
+                        onClick={() => { router.push(`/ar${pathname.replace(/^\/(en|ru|ar)/, '')}`); setIsLanguageDropdownOpen(false); }}
+                        className="block w-full text-left px-4 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700"
+                      >
+                        {t('common.languages.ar', locale)}
+                      </button>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
             <ThemeToggleButton />
             <div className="md:hidden ml-2"> {/* Mobile menu button container */}

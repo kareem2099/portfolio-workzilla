@@ -56,6 +56,16 @@ const placeholderProjects: Project[] = [
     codeLink: 'https://github.com/kareem2099/portfolio-workzilla',
     category: 'Portfolio',
   },
+  {
+    id: '6',
+    title: 'Premium Agency Bot Website',
+    description: 'A modern, interactive single-page website for an HR agency, featuring AI technologies and Telegram bot integration for contact forms.',
+    imageUrl: '/assets/project-placeholder-6.png',
+    techStack: ['HTML', 'CSS', 'JavaScript', 'Telegram Bot API'],
+    liveLink: 'https://premium-agency-bot.vercel.app/',
+    codeLink: 'https://github.com/kareem2099/premium-agency-bot',
+    category: 'Web App / Bot Integration',
+  },
 ];
 
 const pageContainerVariants: Variants = {

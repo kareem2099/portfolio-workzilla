@@ -16,6 +16,9 @@ const nextConfig: NextConfig = {
     // Add any needed experimental features here
   },
   reactStrictMode: true,
+  images: {
+    unoptimized: true, // Temporarily disable image optimization
+  },
   modularizeImports: {
     '@components/*': {
       transform: '@components/{{member}}',
