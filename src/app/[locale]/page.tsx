@@ -18,11 +18,8 @@ const pageVariants: Variants = {
   },
 };
 
-import { PageProps } from '@/lib/localeUtils';
-
-export default function Home({
-  locale,
-}: PageProps) {
+export default function Home() {
+  // No longer destructuring locale as it's not directly used in this component
   return (
     <motion.main
       className="flex flex-col items-center justify-center font-[family-name:var(--font-geist-sans)] bg-slate-50 text-slate-800 dark:bg-gradient-to-br dark:from-slate-900 dark:via-purple-950 dark:to-slate-900 dark:text-slate-100" // Theme-aware background and text
@@ -30,7 +27,7 @@ export default function Home({
       initial="hidden"
       animate="visible"
     >
-      <HeroSection locale={locale} /> 
+      <HeroSection /> 
       {/* HeroSection is min-h-screen, subsequent sections will appear on scroll */}
       
       <AboutSnippetSection />
