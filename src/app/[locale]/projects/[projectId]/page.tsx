@@ -85,8 +85,10 @@ const getProjectById = async (id: string): Promise<Project | undefined> => {
   return placeholderProjects.find(project => project.id === id);
 };
 
+import { ValidLocale } from '@/lib/localeUtils';
+
 interface ProjectDetailPageProps {
-  params: { projectId: string }; // Use specific type instead of any
+  params: { projectId: string; locale: ValidLocale }; // Include locale in params
 }
 
 export default async function ProjectDetailPage({ params }: ProjectDetailPageProps) {
