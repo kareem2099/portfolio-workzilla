@@ -5,11 +5,7 @@ import Link from 'next/link';
 import { Eye, MessageSquare } from 'lucide-react'; // Removed ArrowRight
 import { useTranslations } from 'next-intl'; // Use next-intl's useTranslations
 
-interface HeroSectionProps {
-  // No longer needs locale prop, as useTranslations gets it from context
-}
-
-export default function HeroSection({}: HeroSectionProps) { // Remove locale prop
+export default function HeroSection() { // Remove locale prop and empty interface
   const t = useTranslations('home'); // Initialize useTranslations for the 'home' namespace
 
   // No longer breaking into chars for Arabic compatibility
