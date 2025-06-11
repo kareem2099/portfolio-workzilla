@@ -66,6 +66,56 @@ const placeholderProjects: Project[] = [
     codeLink: 'https://github.com/kareem2099/premium-agency-bot',
     category: 'Web App / Bot Integration',
   },
+  {
+    id: '7',
+    title: 'woordline',
+    description: 'An e-commerce Telda project where users can buy and wood.',
+    imageUrl: '/assets/project-placeholder-7.png',
+    techStack: ['E-commerce', 'Telda', 'Wood'], // Placeholder tech stack
+    liveLink: 'https://project13592275.tilda.ws/',
+    codeLink: 'https://github.com/kareem2099/woodtech',
+    category: 'E-commerce',
+  },
+  {
+    id: '8',
+    title: 'My Luna',
+    description: 'A clothes factory e-commerce platform made by Telda, allowing users to buy and sell clothes.',
+    imageUrl: '/assets/project-placeholder-8.png',
+    techStack: ['E-commerce', 'Telda', 'Clothes'], // Placeholder tech stack
+    liveLink: 'https://my-luna.ru/',
+    codeLink: '#',
+    category: 'E-commerce',
+  },
+  {
+    id: '9',
+    title: 'Indi Company',
+    description: 'An e-commerce Telda project focused on books and wood works.',
+    imageUrl: '/assets/project-placeholder-9.png',
+    techStack: ['E-commerce', 'Telda', 'Books', 'Wood Works'],
+    liveLink: 'https://indi-company.com/',
+    codeLink: 'https://github.com/kareem2099/indi-website',
+    category: 'E-commerce',
+  },
+  {
+    id: '10',
+    title: 'Delivery Wood Works',
+    description: 'A company interested in delivery wood works, built with Tilda.',
+    imageUrl: '/assets/project-placeholder-10.png',
+    techStack: ['Tilda', 'Wood Works', 'Delivery'],
+    liveLink: 'https://project8612217.tilda.ws/',
+    codeLink: 'https://github.com/kareem2099/website',
+    category: 'Website',
+  },
+  {
+    id: '11',
+    title: 'My Luna (Custom)',
+    description: 'A Telda project focused on custom clothing, made according to client wants and needs.',
+    imageUrl: '/assets/project-placeholder-11.png',
+    techStack: ['Tilda', 'Custom Clothing', 'E-commerce'],
+    liveLink: 'https://my-luna.org/',
+    codeLink: 'https://github.com/kareem2099/my-luna',
+    category: 'E-commerce',
+  },
 ];
 
 const pageContainerVariants: Variants = {

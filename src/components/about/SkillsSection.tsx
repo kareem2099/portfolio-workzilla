@@ -75,6 +75,8 @@ export default function SkillsSection({ variants = sectionItemVariants }: Skills
     getSkillData(t, 'dart', <Smartphone className="h-8 w-8 text-cyan-600 dark:text-cyan-400" />, 'advanced', 2, 'years', 10),
     getSkillData(t, 'kotlin', <Smartphone className="h-8 w-8 text-indigo-600 dark:text-indigo-400" />, 'advanced', 3, 'months', 2, undefined, true),
     getSkillData(t, 'reactjs', <Code className="h-8 w-8 text-blue-700 dark:text-blue-500" />, 'advanced', 4, 'years', 4, undefined, true),
+    getSkillData(t, 'telda', <Zap className="h-8 w-8 text-green-500 dark:text-green-400" />, 'proficient', 1, 'years', 4), // Added Telda
+    getSkillData(t, 'wordpress', <Code className="h-8 w-8 text-blue-500 dark:text-blue-400" />, 'proficient', 2, 'years', 3), // Added WordPress
     getSkillData(t, 'uiuxDesign', <Palette className="h-8 w-8 text-orange-500 dark:text-orange-400" />, 'intermediate', 2, 'years', undefined, undefined, true),
   ];
 

@@ -58,6 +58,8 @@
         "dart": { "name": "Dart" },
         "kotlin": { "name": "Kotlin" },
         "reactjs": { "name": "React JS" },
+        "telda": { "name": "Telda" },
+        "wordpress": { "name": "WordPress" },
         "uiuxDesign": { "name": "UI/UX Design" }
       }
     },
