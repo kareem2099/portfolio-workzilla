@@ -87,13 +87,17 @@ const getProjectById = async (id: string): Promise<Project | undefined> => {
 
 import { ValidLocale } from '@/lib/localeUtils';
 
+// Updated interface to match Next.js 15 requirements
 interface ProjectDetailPageProps {
-  params: { projectId: string; locale: ValidLocale }; // Include locale in params
+  params: Promise<{ projectId: string; locale: ValidLocale }>; // params is now a Promise
 }
 
 export default async function ProjectDetailPage({ params }: ProjectDetailPageProps) {
-  // Await the call to the now async getProjectById
-  const project = await getProjectById(params.projectId);
+  // Await the params Promise first
+  const { projectId } = await params;
+  
+  // Then await the call to getProjectById
+  const project = await getProjectById(projectId);
 
   if (!project) {
     notFound();
@@ -102,8 +106,10 @@ export default async function ProjectDetailPage({ params }: ProjectDetailPagePro
   return <ProjectDetailClient project={project} />;
 }
 
-export async function generateMetadata({ params }: { params: { projectId: string } }): Promise<Metadata> {
-  const project = await getProjectById(params.projectId);
+// Updated generateMetadata to handle async params
+export async function generateMetadata({ params }: { params: Promise<{ projectId: string }> }): Promise<Metadata> {
+  const { projectId } = await params;
+  const project = await getProjectById(projectId);
 
   if (!project) {
     return {
