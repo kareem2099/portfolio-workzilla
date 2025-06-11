@@ -12,7 +12,7 @@ const allMessages = {
 };
 
 export default getRequestConfig(async ({ locale }) => {
-  const baseLocale = locale ?? 'en'; // Fallback to 'en' if undefined
+  const baseLocale = locale ?? 'ru'; // Fallback to 'ru' if undefined
   return {
     locale: baseLocale,
     messages: allMessages[baseLocale as keyof typeof allMessages]
