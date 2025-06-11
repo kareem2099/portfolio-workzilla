@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { motion, Variants } from 'framer-motion';
 import BlogPostCard from '@/components/blog/BlogPostCard'; // Reusing the existing card
+import { useTranslations } from 'next-intl';
 
 // Placeholder for blog posts data - In a real app, you'd fetch this
 // For consistency, using the same structure as in blog pages
@@ -54,6 +55,8 @@ const titleVariants: Variants = {
 // For simplicity, BlogPostCard handles its own hover, this is for entry of the wrapper
 
 const LatestBlogPostsSection: React.FC = () => {
+  const t = useTranslations('homePage.latestBlogPostsSection');
+
   if (postsToShow.length === 0) {
     return null; // Don't render section if no posts
   }
@@ -71,7 +74,7 @@ const LatestBlogPostsSection: React.FC = () => {
           className="text-4xl sm:text-5xl font-extrabold text-center mb-12 md:mb-16 text-slate-800 dark:text-slate-100"
           variants={titleVariants}
         >
-          From Our Blog
+          {t('title')}
         </motion.h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10 mb-12 md:mb-16">
@@ -90,7 +93,7 @@ const LatestBlogPostsSection: React.FC = () => {
             href="/blog" 
             className="inline-block px-8 py-3 text-lg font-semibold text-white bg-pink-600 rounded-lg shadow-md hover:bg-pink-700 transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2 dark:focus:ring-offset-slate-900"
           >
-            View All Posts
+            {t('viewAllPostsButton')}
           </Link>
         </motion.div>
       </div>

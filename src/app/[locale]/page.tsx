@@ -5,22 +5,24 @@ import HeroSection from '@/components/home/HeroSection';
 import AboutSnippetSection from '@/components/home/AboutSnippetSection';
 import FeaturedProjectsSection from '@/components/home/FeaturedProjectsSection';
 import SkillsHighlightSection from '@/components/home/SkillsHighlightSection';
-import LatestBlogPostsSection from '@/components/home/LatestBlogPostsSection'; // Import the new section
+import LatestBlogPostsSection from '@/components/home/LatestBlogPostsSection';
 
-// Overall page container variants for staggering sections if needed,
-// though individual sections also have their own entry animations.
 const pageVariants: Variants = {
   hidden: { opacity: 0 },
   visible: { 
     opacity: 1, 
     transition: { 
-      // delayChildren: 0.1, // Delay before the first section starts (Hero has its own complex sequence)
-      // staggerChildren: 0.5 // Stagger between major sections if Hero wasn't full screen
+      // delayChildren: 0.1,
+      // staggerChildren: 0.5
     } 
   },
 };
 
-export default function Home() {
+import { PageProps } from '@/lib/localeUtils';
+
+export default function Home({
+  locale,
+}: PageProps) {
   return (
     <motion.main
       className="flex flex-col items-center justify-center font-[family-name:var(--font-geist-sans)] bg-slate-50 text-slate-800 dark:bg-gradient-to-br dark:from-slate-900 dark:via-purple-950 dark:to-slate-900 dark:text-slate-100" // Theme-aware background and text
@@ -28,7 +30,7 @@ export default function Home() {
       initial="hidden"
       animate="visible"
     >
-      <HeroSection /> 
+      <HeroSection locale={locale} /> 
       {/* HeroSection is min-h-screen, subsequent sections will appear on scroll */}
       
       <AboutSnippetSection />

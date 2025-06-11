@@ -3,6 +3,7 @@
 import React from 'react'; // Import React
 import { motion, Variants } from 'framer-motion';
 import { Zap, Code, Smartphone, Palette } from 'lucide-react'; // Example icons
+import { useTranslations } from 'next-intl';
 
 interface SkillHighlight {
   name: string;
@@ -11,12 +12,15 @@ interface SkillHighlight {
   bgColor: string; // e.g., "bg-pink-500/10"
 }
 
-const skillsToHighlight: SkillHighlight[] = [
-  { name: 'Next.js', icon: <Zap size={40} />, color: 'text-purple-400', bgColor: 'bg-purple-500/10' },
-  { name: 'JavaScript', icon: <Code size={40} />, color: 'text-sky-400', bgColor: 'bg-sky-500/10' },
-  { name: 'Flutter', icon: <Smartphone size={40} />, color: 'text-blue-400', bgColor: 'bg-blue-500/10' },
-  { name: 'UI/UX Design', icon: <Palette size={40} />, color: 'text-pink-400', bgColor: 'bg-pink-500/10' },
-];
+
+const getSkillHighlightData = (t: ReturnType<typeof useTranslations>, skillKey: string, icon: React.ReactNode, color: string, bgColor: string): SkillHighlight => {
+  return {
+    name: t(`skills.${skillKey}`),
+    icon,
+    color,
+    bgColor,
+  };
+};
 
 const sectionVariants: Variants = {
   hidden: { opacity: 0 },
@@ -53,6 +57,15 @@ const skillItemVariants: Variants = {
 };
 
 export default function SkillsHighlightSection() {
+  const t = useTranslations('homePage.skillsHighlightSection');
+
+  const skillsToHighlight: SkillHighlight[] = [
+    getSkillHighlightData(t, 'nextjs', <Zap size={40} />, 'text-purple-400', 'bg-purple-500/10'),
+    getSkillHighlightData(t, 'javascript', <Code size={40} />, 'text-sky-400', 'bg-sky-500/10'),
+    getSkillHighlightData(t, 'flutter', <Smartphone size={40} />, 'text-blue-400', 'bg-blue-500/10'),
+    getSkillHighlightData(t, 'uiuxDesign', <Palette size={40} />, 'text-pink-400', 'bg-pink-500/10'),
+  ];
+
   return (
     <motion.section 
       className="py-20 sm:py-28 bg-slate-100 dark:bg-slate-900" // Theme-aware background
@@ -66,7 +79,7 @@ export default function SkillsHighlightSection() {
           className="text-4xl sm:text-5xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-pink-600 via-purple-600 to-sky-600 dark:from-pink-500 dark:via-purple-500 dark:to-sky-500"
           variants={titleVariants}
         >
-          Technologies I Excel In
+          {t('title')}
         </motion.h2>
         <motion.div 
           className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8"

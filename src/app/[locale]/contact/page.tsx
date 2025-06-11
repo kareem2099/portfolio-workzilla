@@ -1,6 +1,7 @@
 'use client';
 
 import { motion, Variants } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 // import ContactHeader from '@/components/contact/ContactHeader';
 // import ContactForm from '@/components/contact/ContactForm';
 // import SocialLinks from '@/components/contact/SocialLinks';
@@ -32,6 +33,8 @@ const itemVariants: Variants = { // Passed to each section
 };
 
 export default function ContactPage() {
+  const t = useTranslations('contactPage');
+
   return (
     <div className="min-h-screen bg-slate-50 text-slate-800 dark:bg-gradient-to-br dark:from-slate-900 dark:via-purple-950 dark:to-slate-900 dark:text-slate-100 py-16 px-4 sm:px-6 lg:px-8 overflow-hidden flex items-center justify-center">
       <motion.div
@@ -44,7 +47,7 @@ export default function ContactPage() {
           className="text-2xl md:text-3xl font-semibold text-slate-700 dark:text-slate-200"
           variants={itemVariants}
         >
-          If you want to contact me, please contact me in Workzilla.
+          {t('introText')}
         </motion.p>
       </motion.div>
     </div>

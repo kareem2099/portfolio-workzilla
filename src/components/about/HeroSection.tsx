@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { User, MessageSquare } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 const name = "Mohamed Ehab";
 const nameChars = Array.from(name);
@@ -41,6 +42,8 @@ interface HeroSectionProps {
 }
 
 export default function HeroSection({ variants = defaultItemVariants }: HeroSectionProps) {
+  const t = useTranslations('aboutPage.heroSection');
+
   return (
     <motion.section variants={variants} className="text-center mb-16">
       <motion.div
@@ -70,14 +73,14 @@ export default function HeroSection({ variants = defaultItemVariants }: HeroSect
       </motion.h1>
 
       <motion.p variants={variants} className="text-xl text-slate-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
-        A passionate Full-Stack Developer with a knack for creating dynamic, responsive, and user-friendly web applications. I thrive on turning complex problems into elegant solutions.
+        {t('description')}
       </motion.p>
       <motion.div variants={variants}>
         <Link
           href="/contact"
           className="inline-block px-8 py-3 text-lg font-semibold text-white bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 hover:from-purple-700 hover:via-pink-600 hover:to-red-600 dark:from-purple-500 dark:via-pink-500 dark:to-red-500 dark:hover:from-purple-600 dark:hover:via-pink-600 dark:hover:to-red-600 rounded-lg shadow-lg hover:scale-105 transform transition-transform duration-300"
         >
-          Let&apos;s Connect <MessageSquare className="inline ml-2 h-5 w-5" />
+          {t('connectButton')} <MessageSquare className="inline ml-2 h-5 w-5" />
         </Link>
       </motion.div>
     </motion.section>

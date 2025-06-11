@@ -3,6 +3,7 @@
 import { motion, Variants } from 'framer-motion';
 import Link from 'next/link';
 import { UserCircle, ArrowRight } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 const sectionVariants: Variants = {
   hidden: { opacity: 0, y: 50 },
@@ -26,6 +27,8 @@ const buttonVariants: Variants = {
 };
 
 export default function AboutSnippetSection() {
+  const t = useTranslations('homePage.aboutSnippetSection');
+
   return (
     <motion.section 
       className="py-20 sm:py-28 bg-slate-100 dark:bg-slate-800/30 dark:backdrop-blur-sm" // Theme-aware background
@@ -47,14 +50,14 @@ export default function AboutSnippetSection() {
           className="text-4xl sm:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-400 dark:to-pink-500 mb-6"
           variants={textVariants} // Re-use textVariants or create specific ones
         >
-          A Little About Me
+          {t('title')}
         </motion.h2>
         <motion.p 
           className="text-lg sm:text-xl text-slate-600 dark:text-slate-300 mb-10 max-w-2xl mx-auto"
           variants={textVariants}
           transition={{ delay: 0.5 }} // Slightly later delay for paragraph
         >
-          I&apos;m a passionate Full-Stack Developer dedicated to building intuitive, performant, and visually appealing web applications. With a strong foundation in modern web technologies, I love bringing ideas to life and solving complex challenges.
+          {t('description')}
         </motion.p>
         <motion.div
           // initial, animate, whileHover, whileTap will be on the Link/motion.span
@@ -68,7 +71,7 @@ export default function AboutSnippetSection() {
               whileHover="hover"
               whileTap="tap"
             >
-              Learn More <ArrowRight size={20} className="ml-2" />
+              {t('learnMoreButton')} <ArrowRight size={20} className="ml-2" />
             </motion.span>
           </Link>
         </motion.div>

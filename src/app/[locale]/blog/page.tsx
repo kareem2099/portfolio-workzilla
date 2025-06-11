@@ -2,6 +2,7 @@
 import React from 'react';
 import BlogPostCard from '@/components/blog/BlogPostCard';
 import { motion, Variants } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 
 // Placeholder for blog posts data
 const posts = [
@@ -53,6 +54,8 @@ const cardVariants: Variants = {
 };
 
 const BlogPage = () => {
+  const t = useTranslations('blogPage');
+
   return (
     <motion.div
       className="min-h-screen bg-slate-50 text-slate-800 dark:bg-gradient-to-br dark:from-slate-900 dark:via-purple-950 dark:to-slate-900 dark:text-slate-100 py-16 px-4 sm:px-6 lg:px-8"
@@ -65,7 +68,7 @@ const BlogPage = () => {
           className="text-5xl sm:text-6xl font-extrabold text-center mb-16 bg-clip-text text-transparent bg-gradient-to-r from-sky-600 via-cyan-500 to-teal-600 dark:from-sky-400 dark:via-cyan-400 dark:to-teal-400"
           variants={titleVariants}
         >
-          Blog & Articles
+          {t('title')}
         </motion.h1>
         <motion.div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10"

@@ -1,0 +1,117 @@
+{
+  "common": {
+    "welcome": "Welcome",
+    "about": "About",
+    "projects": "Projects",
+    "blog": "Blog",
+    "contact": "Contact",
+    "languages": {
+      "en": "English",
+      "ru": "Russian",
+      "ar": "Arabic"
+    },
+    "siteTitle": "MyPortfolio"
+  },
+  "home": {
+    "name": "Mohamed Ehab",
+    "role": "Full-Stack Developer",
+    "tagline": "Crafting seamless digital experiences with cutting-edge technology and creative design.",
+    "viewWork": "View My Work", 
+    "getInTouch": "Get In Touch"
+  },
+  "contactPage": {
+    "introText": "If you want to contact me, please contact me in Workzilla."
+  },
+  "blogPage": {
+    "title": "Blog & Articles"
+  },
+  "aboutPage": {
+    "heroSection": {
+      "description": "A passionate Full-Stack Developer with a knack for creating dynamic, responsive, and user-friendly web applications. I thrive on turning complex problems into elegant solutions.",
+      "connectButton": "Let's Connect"
+    },
+    "journeySection": {
+      "title": "My Journey",
+      "paragraph1": "My fascination with web development started years ago, tinkering with HTML and CSS. This curiosity quickly evolved into a full-blown passion as I delved into JavaScript and modern frameworks. I believe in continuous learning and staying updated with the latest industry trends to deliver cutting-edge solutions.",
+      "paragraph2": "I specialize in the Next.js ecosystem, leveraging its power for server-side rendering, static site generation, and seamless API integration. My goal is to build not just functional, but also performant and aesthetically pleasing digital experiences.",
+      "paragraph3": "When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or [mention a hobby]."
+    },
+    "skillsSection": {
+      "title": "My Skillset",
+      "levels": {
+        "advanced": "Advanced",
+        "proficient": "Proficient",
+        "intermediate": "Intermediate"
+      },
+      "experienceUnit": {
+        "years": "{count} years experience",
+        "months": "{count} months experience"
+      },
+      "projectsUnit": "{count} projects",
+      "skills": {
+        "nextjs": { "name": "Next.js" },
+        "javascript": { "name": "JavaScript" },
+        "webDevelopment": { "name": "Web Development" },
+        "tailwindCss": { "name": "Tailwind CSS" },
+        "framerMotion": { "name": "Framer Motion" },
+        "flutter": { "name": "Flutter" },
+        "dart": { "name": "Dart" },
+        "kotlin": { "name": "Kotlin" },
+        "reactjs": { "name": "React JS" },
+        "uiuxDesign": { "name": "UI/UX Design" }
+      }
+    },
+    "valuesSection": {
+      "title": "My Core Values",
+      "description": "These principles guide my approach to every project and collaboration.",
+      "values": {
+        "qualityFirst": {
+          "title": "Quality First",
+          "description": "Delivering high-quality, robust, and maintainable code is my top priority. I believe in attention to detail and thorough testing."
+        },
+        "continuousLearning": {
+          "title": "Continuous Learning",
+          "description": "The tech world is ever-evolving, and I am committed to lifelong learning to stay updated with the latest technologies and best practices."
+        },
+        "userCentricApproach": {
+          "title": "User-Centric Approach",
+          "description": "I strive to build applications that are intuitive, accessible, and provide a seamless experience for the end-user."
+        },
+        "proactiveProblemSolving": {
+          "title": "Proactive Problem-Solving",
+          "description": "I enjoy tackling challenges head-on and proactively seeking efficient solutions to complex problems."
+        }
+      }
+    },
+    "callToActionSection": {
+      "title": "Interested in my work?",
+      "description": "Check out some of the projects I've brought to life.",
+      "viewProjectsButton": "View My Projects"
+    }
+  },
+  "homePage": {
+    "aboutSnippetSection": {
+      "title": "A Little About Me",
+      "description": "I'm a passionate Full-Stack Developer dedicated to building intuitive, performant, and visually appealing web applications. With a strong foundation in modern web technologies, I love bringing ideas to life and solving complex challenges.",
+      "learnMoreButton": "Learn More"
+    },
+    "featuredProjectsSection": {
+      "title": "Featured Projects",
+      "noProjectsMessage": "No featured projects to display currently.",
+      "viewAllProjectsButton": "View All Projects"
+    },
+    "skillsHighlightSection": {
+      "title": "Technologies I Excel In",
+      "skills": {
+        "nextjs": "Next.js",
+        "javascript": "JavaScript",
+        "flutter": "Flutter",
+        "uiuxDesign": "UI/UX Design"
+      }
+    },
+    "latestBlogPostsSection": {
+      "title": "From Our Blog",
+      "viewAllPostsButton": "View All Posts"
+    }
+  }
+}

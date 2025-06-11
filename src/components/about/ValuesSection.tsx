@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion, Variants } from 'framer-motion';
 import { CheckCircle, Zap, Users, Lightbulb } from 'lucide-react'; // Example icons
+import { useTranslations } from 'next-intl';
 
 interface ValueItem {
   icon: React.ElementType;
@@ -10,28 +11,14 @@ interface ValueItem {
   description: string;
 }
 
-const values: ValueItem[] = [
-  {
-    icon: CheckCircle,
-    title: 'Quality First',
-    description: 'Delivering high-quality, robust, and maintainable code is my top priority. I believe in attention to detail and thorough testing.',
-  },
-  {
-    icon: Lightbulb,
-    title: 'Continuous Learning',
-    description: 'The tech world is ever-evolving, and I am committed to lifelong learning to stay updated with the latest technologies and best practices.',
-  },
-  {
-    icon: Users,
-    title: 'User-Centric Approach',
-    description: 'I strive to build applications that are intuitive, accessible, and provide a seamless experience for the end-user.',
-  },
-  {
-    icon: Zap, // Represents efficiency or proactivity
-    title: 'Proactive Problem-Solving',
-    description: 'I enjoy tackling challenges head-on and proactively seeking efficient solutions to complex problems.',
-  },
-];
+
+const getValuesData = (t: ReturnType<typeof useTranslations>, icon: React.ElementType, valueKey: string): ValueItem => {
+  return {
+    icon,
+    title: t(`values.${valueKey}.title`),
+    description: t(`values.${valueKey}.description`),
+  };
+};
 
 interface ValuesSectionProps {
   variants?: Variants; // For entry animation from the parent page
@@ -48,6 +35,15 @@ const cardVariants: Variants = {
 };
 
 const ValuesSection: React.FC<ValuesSectionProps> = ({ variants }) => {
+  const t = useTranslations('aboutPage.valuesSection');
+
+  const values: ValueItem[] = [
+    getValuesData(t, CheckCircle, 'qualityFirst'),
+    getValuesData(t, Lightbulb, 'continuousLearning'),
+    getValuesData(t, Users, 'userCentricApproach'),
+    getValuesData(t, Zap, 'proactiveProblemSolving'),
+  ];
+
   return (
     <motion.section 
       className="py-16 md:py-20" // Consistent padding with other sections
@@ -56,10 +52,10 @@ const ValuesSection: React.FC<ValuesSectionProps> = ({ variants }) => {
     >
       <div className="text-center mb-12 md:mb-16">
         <h2 className="text-4xl sm:text-5xl font-extrabold text-slate-800 dark:text-slate-100">
-          My Core Values
+          {t('title')}
         </h2>
         <p className="mt-4 text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto">
-          These principles guide my approach to every project and collaboration.
+          {t('description')}
         </p>
       </div>
 

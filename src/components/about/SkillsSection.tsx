@@ -3,6 +3,7 @@
 import { motion, Variants } from 'framer-motion';
 import { Zap, Smartphone, Code, Wind, Palette } from 'lucide-react'; // Removed Award, Added Wind for Tailwind, Palette for UI/UX
 import InteractiveSkillCard from './InteractiveSkillCard';
+import { useTranslations } from 'next-intl';
 
 const skillCardMotionVariants: Variants = {
   hidden: { scale: 0.8, opacity: 0 },
@@ -14,85 +15,19 @@ const skillCardMotionVariants: Variants = {
   hover: { scale: 1.05, boxShadow: "0px 8px 15px rgba(0,0,0,0.1)", y: -4 }
 };
 
-const skillsData = [
-  { 
-    name: 'Next.js', 
-    icon: <Zap className="h-8 w-8 text-purple-600 dark:text-purple-400" />, 
-    level: 'Advanced',
-    experience: '3 years experience',
-    projects: '3 projects',
-    isPulsing: true,
-  },
-  { 
-    name: 'JavaScript', 
-    icon: <Zap className="h-8 w-8 text-yellow-500 dark:text-yellow-400" />, 
-    level: 'Advanced',
-    experience: '4 years experience',
-    projects: '7 projects',
-    detailsColor: 'text-yellow-500 dark:text-yellow-400', 
-  },
-  { 
-    name: 'Web Development', 
-    icon: <Code className="h-8 w-8 text-sky-600 dark:text-sky-400" />, 
-    level: 'Advanced',
-    experience: '3 years experience',
-    projects: '4 projects',
-    detailsColor: 'text-yellow-500 dark:text-yellow-400', 
-  },
-  { 
-    name: 'Tailwind CSS', 
-    icon: <Wind className="h-8 w-8 text-teal-600 dark:text-teal-400" />, 
-    level: 'Proficient', 
-    experience: '3 years experience',
-    projects: '3 projects',
-  },
-  { 
-    name: 'Framer Motion', 
-    icon: <motion.div className="h-8 w-8 text-pink-600 dark:text-pink-400"> 
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5-10-5-10 5zM12 12.53L2.93 8 12 3.47 21.07 8 12 12.53z"></path></svg>
-          </motion.div>, 
-    level: 'Proficient', 
-    experience: '2 years experience',
-  },
-  { 
-    name: 'Flutter', 
-    icon: <Smartphone className="h-8 w-8 text-blue-600 dark:text-blue-400" />, 
-    level: 'Advanced', 
-    experience: '2 years experience',
-    projects: '10 projects',
-    isPulsing: true, 
-  },
-  { 
-    name: 'Dart', 
-    icon: <Smartphone className="h-8 w-8 text-cyan-600 dark:text-cyan-400" />, 
-    level: 'Advanced', 
-    experience: '2 years experience',
-    projects: '10 projects',
-  },
-  { 
-    name: 'Kotlin', 
-    icon: <Smartphone className="h-8 w-8 text-indigo-600 dark:text-indigo-400" />, 
-    level: 'Advanced', 
-    experience: '3 months experience',
-    projects: '2 projects',
-    isPulsing: true, 
-  },
-  { 
-    name: 'React JS', 
-    icon: <Code className="h-8 w-8 text-blue-700 dark:text-blue-500" />, 
-    level: 'Advanced', 
-    experience: '4 years experience',
-    projects: '4 projects',
-    isPulsing: true, 
-  },
-  { 
-    name: 'UI/UX Design', 
-    icon: <Palette className="h-8 w-8 text-orange-500 dark:text-orange-400" />, 
-    level: 'Intermediate', 
-    experience: '2 years experience',
-    isPulsing: true, 
-  },
-];
+
+// Helper function to get skill data from translations
+const getSkillData = (t: ReturnType<typeof useTranslations>, skillKey: string, icon: React.ReactElement, levelKey: string, experienceCount: number, experienceUnit: 'years' | 'months', projectsCount?: number, detailsColor?: string, isPulsing?: boolean) => {
+  return {
+    name: t(`skills.${skillKey}.name`),
+    icon,
+    level: t(`levels.${levelKey}`),
+    experience: t(`experienceUnit.${experienceUnit}`, { count: experienceCount }),
+    projects: projectsCount ? t('projectsUnit', { count: projectsCount }) : undefined,
+    detailsColor,
+    isPulsing,
+  };
+};
 
 const sectionItemVariants: Variants = {
   hidden: { y: 20, opacity: 0 },
@@ -126,6 +61,23 @@ const skillsetTitleVariants: Variants = {
 };
 
 export default function SkillsSection({ variants = sectionItemVariants }: SkillsSectionProps) {
+  const t = useTranslations('aboutPage.skillsSection');
+
+  const skillsData = [
+    getSkillData(t, 'nextjs', <Zap className="h-8 w-8 text-purple-600 dark:text-purple-400" />, 'advanced', 3, 'years', 3, undefined, true),
+    getSkillData(t, 'javascript', <Zap className="h-8 w-8 text-yellow-500 dark:text-yellow-400" />, 'advanced', 4, 'years', 7, 'text-yellow-500 dark:text-yellow-400'),
+    getSkillData(t, 'webDevelopment', <Code className="h-8 w-8 text-sky-600 dark:text-sky-400" />, 'advanced', 3, 'years', 4, 'text-yellow-500 dark:text-yellow-400'),
+    getSkillData(t, 'tailwindCss', <Wind className="h-8 w-8 text-teal-600 dark:text-teal-400" />, 'proficient', 3, 'years', 3),
+    getSkillData(t, 'framerMotion', <motion.div className="h-8 w-8 text-pink-600 dark:text-pink-400"> 
+                                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5-10-5-10 5zM12 12.53L2.93 8 12 3.47 21.07 8 12 12.53z"></path></svg>
+                                      </motion.div>, 'proficient', 2, 'years'),
+    getSkillData(t, 'flutter', <Smartphone className="h-8 w-8 text-blue-600 dark:text-blue-400" />, 'advanced', 2, 'years', 10, undefined, true),
+    getSkillData(t, 'dart', <Smartphone className="h-8 w-8 text-cyan-600 dark:text-cyan-400" />, 'advanced', 2, 'years', 10),
+    getSkillData(t, 'kotlin', <Smartphone className="h-8 w-8 text-indigo-600 dark:text-indigo-400" />, 'advanced', 3, 'months', 2, undefined, true),
+    getSkillData(t, 'reactjs', <Code className="h-8 w-8 text-blue-700 dark:text-blue-500" />, 'advanced', 4, 'years', 4, undefined, true),
+    getSkillData(t, 'uiuxDesign', <Palette className="h-8 w-8 text-orange-500 dark:text-orange-400" />, 'intermediate', 2, 'years', undefined, undefined, true),
+  ];
+
   return (
     <motion.section variants={variants} className="mb-16">
       <motion.h2 
@@ -134,7 +86,7 @@ export default function SkillsSection({ variants = sectionItemVariants }: Skills
         initial="initial"
         animate="animate"
       >
-        <Zap className="mr-3 h-10 w-10" /> My Skillset
+        <Zap className="mr-3 h-10 w-10" /> {t('title')}
       </motion.h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-8"> {/* Adjusted grid for potentially taller cards */}
         {skillsData.map((skill) => (

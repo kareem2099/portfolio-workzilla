@@ -7,15 +7,23 @@ import { useState, useEffect } from 'react';
 import ThemeToggleButton from './ThemeToggleButton';
 import { Menu, X } from 'lucide-react'; // Icons for mobile menu
 
-const navItems = [
-  { name: 'Home', href: '/' },
-  { name: 'About', href: '/about' },
-  { name: 'Projects', href: '/projects' },
-  { name: 'Blog', href: '/blog' },
-  { name: 'Contact', href: '/contact' },
-];
+import { t } from '@/lib/utils';
+import { Globe } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 
-export default function Header() {
+export default function Header({ locale = 'en' }: { locale?: string }) {
+  const router = useRouter();
+
+  useEffect(() => {
+    document.cookie = `NEXT_LOCALE=${locale};path=/`;
+  }, [locale]);
+  const navItems = [
+    { name: t('common.welcome', locale), href: '/' },
+    { name: t('common.about', locale), href: '/about' },
+    { name: t('common.projects', locale), href: '/projects' },
+    { name: t('common.blog', locale), href: '/blog' },
+    { name: t('common.contact', locale), href: '/contact' },
+  ];
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State for mobile menu
@@ -82,7 +90,7 @@ export default function Header() {
             whileHover="hover"
           >
             <Link href="/" className="text-2xl font-bold text-slate-800 dark:text-white">
-              MyPortfolio
+              {t('common.siteTitle', locale)}
             </Link>
           </motion.div>
           {/* Desktop Navigation */}
@@ -132,7 +140,34 @@ export default function Header() {
             })}
           </motion.nav>
           {/* Right side items: Theme Toggle and Mobile Menu Button */}
-          <div className="flex items-center">
+          <div className="flex items-center gap-2">
+            <div className="relative group">
+              <button className="p-2 rounded-full hover:bg-slate-200 dark:hover:bg-slate-700">
+                <Globe size={20} />
+              </button>
+              <div className="absolute right-0 mt-2 w-32 origin-top-right rounded-md bg-white dark:bg-slate-800 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-50">
+                <div className="py-1">
+                  <button 
+                    onClick={() => router.push(`/en${pathname.replace(/^\/(en|ru|ar)/, '')}`)}
+                    className="block w-full text-left px-4 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700"
+                  >
+                    {t('common.languages.en', locale)}
+                  </button>
+                  <button 
+                    onClick={() => router.push(`/ru${pathname.replace(/^\/(en|ru|ar)/, '')}`)}
+                    className="block w-full text-left px-4 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700"
+                  >
+                    {t('common.languages.ru', locale)}
+                  </button>
+                  <button 
+                    onClick={() => router.push(`/ar${pathname.replace(/^\/(en|ru|ar)/, '')}`)}
+                    className="block w-full text-left px-4 py-2 text-sm text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700"
+                  >
+                    {t('common.languages.ar', locale)}
+                  </button>
+                </div>
+              </div>
+            </div>
             <ThemeToggleButton />
             <div className="md:hidden ml-2"> {/* Mobile menu button container */}
               <motion.button

@@ -1,0 +1,129 @@
+{
+  "common": {
+    "welcome": "مرحباً",
+    "about": "من نحن",
+    "projects": "المشاريع",
+    "blog": "المدونة", 
+    "contact": "اتصل بنا",
+    "languages": {
+      "en": "الإنجليزية",
+      "ru": "الروسية",
+      "ar": "العربية"
+    },
+    "siteTitle": "معرض أعمالي"
+  },
+  "home": {
+    "name": "محمد إيهاب",
+    "role": "مطور Full-Stack",
+    "tagline": "أصنع تجارب رقمية سلسة باستخدام أحدث التقنيات والتصميم الإبداعي.",
+    "viewWork": "عرض أعمالي",
+    "getInTouch": "تواصل معي"
+  },
+  "homePage": {
+    "aboutSnippetSection": {
+      "title": "نبذة عني",
+      "description": "أنا مطور Full-Stack شغوف، مكرس لبناء تطبيقات ويب بديهية، عالية الأداء، وجذابة بصريًا. بفضل أساس قوي في تقنيات الويب الحديثة، أحب تحويل الأفكار إلى واقع وحل التحديات المعقدة.",
+      "learnMoreButton": "تعلم المزيد"
+    },
+    "featuredProjectsSection": {
+      "title": "المشاريع المميزة",
+      "noProjectsMessage": "لا توجد مشاريع مميزة لعرضها حاليًا.",
+      "viewAllProjectsButton": "عرض جميع المشاريع"
+    },
+    "skillsHighlightSection": {
+      "title": "التقنيات التي أتقنها",
+      "skills": {
+        "nextjs": "Next.js",
+        "javascript": "JavaScript",
+        "flutter": "Flutter",
+        "uiuxDesign": "تصميم واجهة المستخدم/تجربة المستخدم"
+      }
+    },
+    "latestBlogPostsSection": {
+      "title": "من مدونتنا",
+      "viewAllPostsButton": "عرض جميع المنشورات"
+    }
+  },
+  "contactPage": {
+    "introText": "إذا كنت ترغب في الاتصال بي، يرجى الاتصال بي في Workzilla."
+  },
+  "blogPage": {
+    "title": "المدونة والمقالات"
+  },
+  "aboutPage": {
+    "heroSection": {
+      "description": "مطور Full-Stack شغوف بإنشاء تطبيقات ويب ديناميكية، سريعة الاستجابة، وسهلة الاستخدام. أزدهر في تحويل المشاكل المعقدة إلى حلول أنيقة.",
+      "connectButton": "دعنا نتواصل"
+    },
+    "journeySection": {
+      "title": "رحلتي",
+      "paragraph1": "بدأ افتتاني بتطوير الويب منذ سنوات، بالعبث بلغات HTML و CSS. سرعان ما تطور هذا الفضول إلى شغف كامل عندما تعمقت في JavaScript والأطر الحديثة. أؤمن بالتعلم المستمر ومواكبة أحدث اتجاهات الصناعة لتقديم حلول متطورة.",
+      "paragraph2": "أنا متخصص في بيئة Next.js، مستفيدًا من قوتها في العرض من جانب الخادم، وتوليد المواقع الثابتة، وتكامل API السلس. هدفي هو بناء تجارب رقمية ليست وظيفية فحسب، بل أيضًا عالية الأداء وجمالية.",
+      "paragraph3": "عندما لا أكون مشغولاً بالبرمجة، يمكنك أن تجدني أستكشف تقنيات جديدة، أو أساهم في مشاريع مفتوحة المصدر، أو [اذكر هواية]."
+    },
+    "skillsSection": {
+      "title": "مجموعتي المهارية",
+      "levels": {
+        "advanced": "متقدم",
+        "proficient": "متمكن",
+        "intermediate": "متوسط"
+      },
+      "experienceUnit": {
+        "years": "{count} سنوات خبرة",
+        "months": "{count} أشهر خبرة"
+      },
+      "projectsUnit": "{count} مشاريع",
+      "skills": {
+        "nextjs": { "name": "Next.js" },
+        "javascript": { "name": "JavaScript" },
+        "webDevelopment": { "name": "تطوير الويب" },
+        "tailwindCss": { "name": "Tailwind CSS" },
+        "framerMotion": { "name": "Framer Motion" },
+        "flutter": { "name": "Flutter" },
+        "dart": { "name": "Dart" },
+        "kotlin": { "name": "Kotlin" },
+        "reactjs": { "name": "React JS" },
+        "uiuxDesign": { "name": "تصميم واجهة المستخدم/تجربة المستخدم" }
+      }
+    },
+    "valuesSection": {
+      "title": "قيمي الأساسية",
+      "description": "هذه المبادئ توجه نهجي في كل مشروع وتعاون.",
+      "values": {
+        "qualityFirst": {
+          "title": "الجودة أولاً",
+          "description": "تقديم كود عالي الجودة، قوي، وقابل للصيانة هو أولويتي القصوى. أؤمن بالاهتمام بالتفاصيل والاختبار الشامل."
+        },
+        "continuousLearning": {
+          "title": "التعلم المستمر",
+          "description": "عالم التكنولوجيا يتطور باستمرار، وأنا ملتزم بالتعلم مدى الحياة للبقاء على اطلاع بأحدث التقنيات وأفضل الممارسات."
+        },
+        "userCentricApproach": {
+          "title": "النهج المتمحور حول المستخدم",
+          "description": "أسعى جاهداً لبناء تطبيقات بديهية، سهلة الوصول، وتوفر تجربة سلسة للمستخدم النهائي."
+        },
+        "proactiveProblemSolving": {
+          "title": "حل المشكلات بشكل استباقي",
+          "description": "أستمتع بمعالجة التحديات مباشرة والبحث بشكل استباقي عن حلول فعالة للمشاكل المعقدة."
+        }
+      }
+    },
+    "callToActionSection": {
+      "title": "مهتم بأعمالي؟",
+      "description": "اطلع على بعض المشاريع التي قمت بإحيائها.",
+      "viewProjectsButton": "عرض مشاريعي"
+    },
+    "aboutHomePage": {
+      "aboutSnippetSection": {
+        "title": "نبذة عني",
+        "description": "أنا مطور Full-Stack شغوف، مكرس لبناء تطبيقات ويب بديهية، عالية الأداء، وجذابة بصريًا. بفضل أساس قوي في تقنيات الويب الحديثة، أحب تحويل الأفكار إلى واقع وحل التحديات المعقدة.",
+        "learnMoreButton": "تعلم المزيد"
+      }
+    },
+    "featuredProjectsSection": {
+      "title": "المشاريع المميزة",
+      "noProjectsMessage": "لا توجد مشاريع مميزة لعرضها حاليًا.",
+      "viewAllProjectsButton": "عرض جميع المشاريع"
+    }
+  }
+}

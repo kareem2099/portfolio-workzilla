@@ -4,6 +4,7 @@ import { motion, Variants } from 'framer-motion';
 import Link from 'next/link';
 import ProjectCard, { Project } from '@/components/projects/ProjectCard'; // Re-use ProjectCard
 import { ArrowRight } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 // Placeholder data - in a real app, this would come from a CMS or API, filtered for "featured"
 const featuredProjectsData: Project[] = [
@@ -53,6 +54,8 @@ const gridVariants: Variants = {
 };
 
 export default function FeaturedProjectsSection() {
+  const t = useTranslations('homePage.featuredProjectsSection');
+
   return (
     <motion.section 
       className="py-20 sm:py-28"
@@ -66,7 +69,7 @@ export default function FeaturedProjectsSection() {
           className="text-4xl sm:text-5xl font-bold text-center mb-16 text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-cyan-500 to-teal-600 dark:from-sky-400 dark:via-cyan-400 dark:to-teal-500"
           variants={titleVariants}
         >
-          Featured Projects
+          {t('title')}
         </motion.h2>
         
         {featuredProjectsData.length > 0 ? (
@@ -79,7 +82,7 @@ export default function FeaturedProjectsSection() {
             ))}
           </motion.div>
         ) : (
-          <p className="text-center text-xl text-slate-400">No featured projects to display currently.</p>
+          <p className="text-center text-xl text-slate-400">{t('noProjectsMessage')}</p>
         )}
 
         <motion.div 
@@ -94,7 +97,7 @@ export default function FeaturedProjectsSection() {
               whileHover={{ scale: 1.05, boxShadow: "0px 5px 15px rgba(56, 189, 248, 0.3)" /* sky-400 with opacity */}} // Box shadow might need theme adjustment too
               whileTap={{ scale: 0.95 }}
             >
-              View All Projects <ArrowRight size={20} className="ml-2" />
+              {t('viewAllProjectsButton')} <ArrowRight size={20} className="ml-2" />
             </motion.span>
           </Link>
         </motion.div>
