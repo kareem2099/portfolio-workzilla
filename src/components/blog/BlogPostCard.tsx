@@ -10,21 +10,17 @@ interface Post {
 
 interface BlogPostCardProps {
   post: Post;
+  onClick?: () => void;
 }
 
-const BlogPostCard: React.FC<BlogPostCardProps> = ({ post }) => {
+const BlogPostCard: React.FC<BlogPostCardProps> = ({ post, onClick }) => {
   return (
-    <div className="border p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card text-card-foreground">
+    <div className="border p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card text-card-foreground" onClick={onClick}>
       <h2 className="text-2xl font-semibold mb-2">
-        <Link href={`/blog/${post.slug}`} className="hover:text-primary transition-colors">
           {post.title}
-        </Link>
       </h2>
       <p className="text-sm text-muted-foreground mb-3">{new Date(post.date).toLocaleDateString()}</p>
       <p className="text-muted-foreground mb-4">{post.excerpt}</p>
-      <Link href={`/blog/${post.slug}`} className="text-primary hover:underline font-medium">
-        Read more &rarr;
-      </Link>
     </div>
   );
 };

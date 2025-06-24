@@ -3,7 +3,7 @@
 import { motion, Variants } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Github, ExternalLink, Zap } from 'lucide-react';
+import { ExternalLink, Zap } from 'lucide-react';
 
 export interface Project {
   id: string;
@@ -14,11 +14,16 @@ export interface Project {
   liveLink?: string;
   codeLink?: string;
   category?: string;
+  windowsPrice?: number;
+  linuxPrice?: number;
+  windowsBuyLink?: string;
+  linuxBuyLink?: string;
 }
 
 interface ProjectCardProps {
   project: Project;
   variants?: Variants;
+  locale?: string;
 }
 
 const cardVariants: Variants = {
@@ -32,9 +37,11 @@ const cardVariants: Variants = {
   },
 };
 
-export default function ProjectCard({ project, variants = cardVariants }: ProjectCardProps) {
+export default function ProjectCard({ project, variants = cardVariants, locale }: ProjectCardProps) {
+
+  const linkHref = project.id === 'stocktune' ? `/projects/${project.id}` : `/projects/${project.id}`;
+
   return (
-    // Outermost Link removed. motion.div is the top-level element.
     <motion.div 
       variants={variants}
       initial="hidden"
@@ -46,10 +53,10 @@ export default function ProjectCard({ project, variants = cardVariants }: Projec
       }}
       className="bg-white dark:bg-slate-800/60 dark:backdrop-blur-md rounded-xl overflow-hidden shadow-lg dark:shadow-xl flex flex-col h-full group border border-slate-200 dark:border-slate-700/50"
     >
-      <Link href={`/projects/${project.id}`} className="block w-full h-56 relative group-hover:bg-slate-300 dark:group-hover:bg-slate-600/70 transition-colors duration-300" aria-label={`View details for ${project.title}`}>
-        <div className="relative w-full h-full bg-slate-200 dark:bg-slate-700">
+      <Link href={linkHref} className="block" aria-label={`View details for ${project.title}`}>
+        <div className="relative w-full h-56 relative group-hover:bg-slate-300 dark:group-hover:bg-slate-600/70 transition-colors duration-300" aria-label={`View details for ${project.title}`}>
           <Image
-            src={project.imageUrl || '/assets/placeholder-project.png'}
+            src={project.imageUrl || '/assets/project-placeholder.png'}
             alt={project.title}
             fill
             style={{ objectFit: 'cover' }}
@@ -61,12 +68,12 @@ export default function ProjectCard({ project, variants = cardVariants }: Projec
 
       <div className="p-6 flex flex-col flex-grow">
         <h3 className="text-2xl font-bold mb-2">
-          <Link href={`/projects/${project.id}`} className="text-pink-600 dark:text-pink-400 group-hover:text-pink-500 dark:group-hover:text-pink-300 transition-colors duration-300 hover:underline">
+          <span className="text-pink-600 dark:text-pink-400 group-hover:text-pink-500 dark:group-hover:text-pink-300 transition-colors duration-300 hover:underline">
             {project.title}
-          </Link>
+          </span>
         </h3>
         <p className="text-slate-600 dark:text-slate-300 text-sm mb-4 flex-grow min-h-[60px]">{project.description}</p>
-        
+          
         <div className="mb-4">
           <h4 className="text-xs font-semibold text-slate-500 dark:text-slate-400 uppercase mb-2">Technologies Used:</h4>
           <motion.div className="flex flex-wrap gap-2" variants={{ visible: { transition: { staggerChildren: 0.05, delayChildren:0.7 } } }} initial="hidden" animate="visible" >
@@ -75,36 +82,44 @@ export default function ProjectCard({ project, variants = cardVariants }: Projec
                 key={tech} 
                 className="px-2 py-1 text-xs bg-purple-100 text-purple-700 dark:bg-purple-700/50 dark:text-purple-300 rounded-full flex items-center"
                 variants={{ hidden: {opacity:0, y:10}, visible: {opacity:1, y:0, transition: {type: 'spring', stiffness:100}} }}
-              >
-                <Zap size={12} className="mr-1 opacity-70" /> {tech}
+                >
+                  <Zap size={12} className="mr-1 opacity-70" /> {tech}
               </motion.span>
             ))}
           </motion.div>
         </div>
 
-        <div className="mt-auto flex justify-start space-x-3 sm:space-x-4 pt-4 border-t border-slate-200 dark:border-slate-700/50">
-          {project.liveLink && (
-            <Link href={project.liveLink} target="_blank" rel="noopener noreferrer" className="flex items-center text-sm text-sky-600 hover:text-sky-500 dark:text-sky-400 dark:hover:text-sky-300 px-3 py-1 rounded-md hover:bg-sky-100 dark:hover:bg-sky-500/20 transition-all duration-200 group-hover:text-sky-500 dark:group-hover:text-sky-300">
-              <motion.span 
+        <div className="mt-2">
+          {project.windowsPrice && (
+            <span className="text-lg font-semibold text-pink-600 dark:text-pink-400">Win: ${project.windowsPrice}</span>
+          )}
+          {project.windowsBuyLink && locale && (
+            <Link href={project.windowsBuyLink.startsWith('http') ? project.windowsBuyLink : `/${locale}${project.windowsBuyLink}`} target="_blank" rel="noopener noreferrer" className="flex items-center text-sm text-sky-600 hover:text-sky-500 dark:text-sky-400 dark:hover:text-sky-300 px-3 py-1 rounded-md hover:bg-sky-100 dark:hover:bg-sky-500/20 transition-all duration-200 group-hover:text-sky-500 dark:group-hover:text-sky-300">
+              <motion.span
                 className="flex items-center"
-                whileHover={{ scale: 1.05, y:-2 }}
-                whileTap={{ scale: 0.95, y:0 }}
+                whileHover={{ scale: 1.05, y: -2 }}
+                whileTap={{ scale: 0.95, y: 0 }}
               >
-                <ExternalLink size={16} className="mr-1.5" /> Live Demo
+                <ExternalLink size={16} className="mr-1.5" /> Buy for Windows
               </motion.span>
             </Link>
           )}
-          {project.codeLink && (
-            <Link href={project.codeLink} target="_blank" rel="noopener noreferrer" className="flex items-center text-sm text-slate-500 hover:text-slate-700 dark:text-slate-400 dark:hover:text-slate-200 px-3 py-1 rounded-md hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-all duration-200 group-hover:text-slate-700 dark:group-hover:text-slate-200">
-              <motion.span 
-                className="flex items-center"
-                whileHover={{ scale: 1.05, y:-2 }}
-                whileTap={{ scale: 0.95, y:0 }}
-              >
-                <Github size={16} className="mr-1.5" /> View Code
-              </motion.span>
-            </Link>
+        </div>
+        <div className="mt-2">
+          {project.linuxPrice && (
+            <span className="text-lg font-semibold text-pink-600 dark:text-pink-400">Linux: ${project.linuxPrice}</span>
           )}
+          {project.linuxBuyLink && locale && (
+            <Link href={project.linuxBuyLink.startsWith('http') ? project.linuxBuyLink : `/${locale}${project.linuxBuyLink}`} target="_blank" rel="noopener noreferrer" className="flex items-center text-sm text-sky-600 hover:text-sky-500 dark:text-sky-400 dark:hover:text-sky-300 px-3 py-1 rounded-md hover:bg-sky-100 dark:hover:bg-sky-500/20 transition-all duration-200 group-hover:text-sky-500 dark:group-hover:text-sky-300">
+            <motion.span
+              className="flex items-center"
+              whileHover={{ scale: 1.05, y: -2 }}
+              whileTap={{ scale: 0.95, y: 0 }}
+            >
+              <ExternalLink size={16} className="mr-1.5" /> Buy for Linux
+            </motion.span>
+          </Link>
+        )}
         </div>
       </div>
     </motion.div>

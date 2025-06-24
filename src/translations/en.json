@@ -5,6 +5,7 @@
     "projects": "Projects",
     "blog": "Blog",
     "contact": "Contact",
+    "apps": "Apps",
     "languages": {
       "en": "English",
       "ru": "Russian",
@@ -23,7 +24,10 @@
     "introText": "If you want to contact me, please contact me in Workzilla."
   },
   "blogPage": {
-    "title": "Blog & Articles"
+    "title": "Blog & Articles",
+    "myFirstYearInCybersecurityTitle": "My First Year in Cybersecurity (2017)",
+    "myFirstYearInCybersecurityExcerpt": "This was my first time using kali linux i was interisted in hacking as kid for hacking wifi of my wifi...",
+    "myFirstYearInCybersecurityContent": "This was my first time using kali linux i was interisted in hacking as kid for hacking wifi of my wifi ( not all wifi in my area or my sydey place ) and step by step i devolop and use hacking tools like alfa this my jorney as hacking"
   },
   "aboutPage": {
     "heroSection": {

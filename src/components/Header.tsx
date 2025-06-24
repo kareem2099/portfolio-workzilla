@@ -23,8 +23,10 @@ export default function Header({ locale = 'en' }: { locale?: string }) {
     { name: t('common.projects', locale), href: '/projects' },
     { name: t('common.blog', locale), href: '/blog' },
     { name: t('common.contact', locale), href: '/contact' },
+    { name: t('common.apps', locale), href: '/apps' },
   ];
-  const pathname = usePathname();
+  const rawPathname = usePathname();
+  const pathname = rawPathname ?? '/'; // or '' depending on your logic
   const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State for mobile menu
   const [isLanguageDropdownOpen, setIsLanguageDropdownOpen] = useState(false); // State for language dropdown
@@ -102,7 +104,7 @@ export default function Header({ locale = 'en' }: { locale?: string }) {
             animate="visible"
           >
             {navItems.map((item) => {
-              const isActive = pathname === item.href;
+              const isActive = pathname !== null && pathname === item.href;
               return (
                 <motion.div
                   key={item.name}
@@ -112,7 +114,7 @@ export default function Header({ locale = 'en' }: { locale?: string }) {
                   whileTap={{ scale: 0.95 }}
                 >
                   <Link
-                    href={item.href}
+                    href={`/${locale}${item.href}`}
                     className={`block rounded-md px-3 py-2 text-sm font-medium transition-colors
                       ${
                         isActive
@@ -210,21 +212,23 @@ export default function Header({ locale = 'en' }: { locale?: string }) {
           >
             <nav className="flex flex-col space-y-1 px-4 pt-2 pb-3">
               {navItems.map((item) => {
-                const isActive = pathname === item.href;
+                const isActive = pathname !== null && pathname === item.href;
                 return (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    onClick={() => setIsMobileMenuOpen(false)} // Close menu on click
-                    className={`block px-3 py-2 rounded-md text-base font-medium 
-                      ${
-                        isActive
-                          ? 'bg-pink-100 dark:bg-pink-500/30 text-pink-700 dark:text-pink-300'
-                          : 'text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700'
-                      } transition-colors`}
-                  >
-                    {item.name}
-                  </Link>
+                  
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      className={`block px-3 py-2 rounded-md text-base font-medium 
+                        ${
+                          isActive
+                            ? 'bg-pink-100 dark:bg-pink-500/30 text-pink-700 dark:text-pink-300'
+                            : 'text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-700'
+                        } transition-colors`}
+                      onClick={() => setIsMobileMenuOpen(false)} // Close menu on click
+                    >
+                      {item.name}
+                    </Link>
+                  
                 );
               })}
             </nav>

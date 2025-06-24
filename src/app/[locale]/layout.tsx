@@ -29,13 +29,12 @@ export default async function RootLayout({
   children,
   params,
 }: Readonly<{
-  children: React.ReactElement;
+  children: React.ReactElement<{ params: { locale: string } }>;
   params: Promise<{ locale: string }>;
 }>) {
   const resolvedParams = await params;
   const locale = await getValidLocale(resolvedParams.locale);
   
-  // Fix: Pass locale directly as a string, not as an object
   const messages = await getMessages({ locale });
 
   return (
@@ -46,7 +45,7 @@ export default async function RootLayout({
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeProvider>
             <Header locale={locale} />
-            {children}
+            {React.cloneElement(children, { params: resolvedParams })}
             <AIChatController /> {/* Add AIChatController here */}
           </ThemeProvider>
         </NextIntlClientProvider>
