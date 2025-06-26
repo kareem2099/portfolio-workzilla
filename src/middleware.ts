@@ -4,46 +4,43 @@ import type { NextRequest } from 'next/server';
 const locales = ['en', 'ru', 'ar'];
 const defaultLocale = 'ru';
 
-export function middleware(request: NextRequest) {
+const PUBLIC_FILE = /\.(.*)$/;
+
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-
-  // Check if the path is the admin route
-  if (pathname === '/admin' || pathname.startsWith('/admin/')) {
-    const loggedIn = request.cookies.get('loggedIn')?.value === 'true';
-    if (!loggedIn) {
-      const url = new URL(`/admin/login`, request.url);
-      return NextResponse.redirect(url);
-    }
+  if (
+    pathname.startsWith('/_next') ||
+    pathname.startsWith('/api') ||
+    pathname.startsWith('/static') ||
+    pathname.includes('/favicon.') ||
+    PUBLIC_FILE.test(pathname)
+  ) {
     return NextResponse.next();
   }
 
-  // Check if the path starts with a locale
+  const cookie = request.cookies.get('loggedIn');
+  const loggedIn = cookie?.value === 'true';
+
+  const url = request.nextUrl.clone();
+  url.pathname = `/admin/login`;
+
+  if (pathname.startsWith('/admin') && !loggedIn) {
+    return NextResponse.redirect(url);
+  }
+
   const pathnameHasLocale = locales.some(
-    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`)
+    (locale) => pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`
+  );
 
-  if (pathnameHasLocale) {
-    return NextResponse.next();
-  }
+  if (pathnameHasLocale) return;
 
-  // Check if the path is an API route
-  if (pathname.startsWith('/api/')) {
-    return NextResponse.next();
-  }
-
-  // Get the locale from the cookie or use the default locale
   const locale = request.cookies.get('NEXT_LOCALE')?.value || defaultLocale;
-
-  // Redirect to the locale-prefixed path
-  request.nextUrl.pathname = `/${locale}${pathname === '/' ? '' : pathname}`;
+  request.nextUrl.pathname = `/${locale}${pathname}`;
   return NextResponse.redirect(request.nextUrl);
 }
 
 export const config = {
   matcher: [
-    // Match all paths except for the ones starting with:
-    // - _next (Next.js internals)
-    // - api (API routes)
-    // - favicon.ico (favicon file)
-    '/((?!_next|api|favicon.ico).*)',
+    '/((?!api|_next/static|_next/image|favicon.ico).*)',
   ],
 };

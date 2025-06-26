@@ -1,20 +1,29 @@
 import { useState } from 'react';
-import { useRouter } from 'next/router';
 import { setCookie } from 'cookies-next';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const router = useRouter();
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    // Basic authentication logic (replace with your actual authentication)
-    if (email === "admin" && password === "password") {
-      // Set a cookie to indicate that the user is logged in
-      setCookie('loggedIn', 'true');
-      router.push('/admin');
+    const response = await fetch('/api/admin/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email, password }),
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      if (data.success) {
+        setCookie('loggedIn', 'true', { path: '/', maxAge: 60 * 60 }); // Set cookie to expire in 1 hour
+        window.location.href = '/admin'; // Force full page reload to ensure middleware picks up cookie
+      } else {
+        alert('Invalid credentials');
+      }
     } else {
       alert('Invalid credentials');
     }

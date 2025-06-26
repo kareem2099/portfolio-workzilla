@@ -24,6 +24,10 @@ const nextConfig: NextConfig = {
       transform: '@components/{{member}}',
     },
   },
+  env: {
+    ADMIN_USERNAME: process.env.ADMIN_USERNAME || process.env.NEXT_PUBLIC_ADMIN_USERNAME,
+    ADMIN_PASSWORD: process.env.ADMIN_PASSWORD || process.env.NEXT_PUBLIC_ADMIN_PASSWORD,
+  },
 };
 
 export default withNextIntl(nextConfig);

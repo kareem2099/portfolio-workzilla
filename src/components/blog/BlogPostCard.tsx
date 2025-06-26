@@ -1,26 +1,35 @@
 import React from 'react';
-import Link from 'next/link';
 
-interface Post {
-  slug: string;
-  title: string;
+interface BlogPostType {
+  _id: string;
+  title: {
+    ar: string;
+    ru: string;
+    en: string;
+  };
+  content: {
+    ar: string;
+    ru: string;
+    en: string;
+  };
+  author: string;
   date: string;
-  excerpt: string;
+  likes: number;
 }
 
 interface BlogPostCardProps {
-  post: Post;
-  onClick?: () => void;
+  post: BlogPostType;
 }
 
-const BlogPostCard: React.FC<BlogPostCardProps> = ({ post, onClick }) => {
+const BlogPostCard: React.FC<BlogPostCardProps> = ({ post }) => {
+  const locale = 'en'; // TODO: Get the current locale
+
   return (
-    <div className="border p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card text-card-foreground" onClick={onClick}>
+    <div className="border p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300 bg-card text-card-foreground">
       <h2 className="text-2xl font-semibold mb-2">
-          {post.title}
+        {post.title[locale]}
       </h2>
       <p className="text-sm text-muted-foreground mb-3">{new Date(post.date).toLocaleDateString()}</p>
-      <p className="text-muted-foreground mb-4">{post.excerpt}</p>
     </div>
   );
 };

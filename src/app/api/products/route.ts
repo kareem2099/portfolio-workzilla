@@ -1,12 +1,11 @@
 import { NextResponse } from 'next/server';
-import clientPromise from "@/lib/mongodb";
+import dbConnect from "@/lib/mongodb";
+import Product from "@/models/Product"; // Import the new Product model
 
 export async function GET() {
   try {
-    const client = await clientPromise;
-    const db = client.db();
-
-    const products = await db.collection("products").find({}).toArray();
+    await dbConnect(); // Ensure Mongoose is connected
+    const products = await Product.find({});
 
     return NextResponse.json(products);
   } catch (error) {
@@ -17,9 +16,7 @@ export async function GET() {
 
 export async function POST(request: Request) {
   try {
-    const client = await clientPromise;
-    const db = client.db();
-
+    await dbConnect(); // Ensure Mongoose is connected
     const body = await request.json();
 
     const product = {
@@ -33,7 +30,7 @@ export async function POST(request: Request) {
       linuxBuyLink: body.linuxBuyLink,
     };
 
-    await db.collection("products").insertOne(product);
+    await Product.create(product); // Use Mongoose model to create product
 
     return NextResponse.json({ message: 'Product created successfully' }, { status: 201 });
   } catch (error) {
