@@ -50,7 +50,7 @@ export default function BlogPageContent({ id }: BlogPageContentProps) {
 
   useEffect(() => {
     fetchPost();
-  }, [id]);
+  }, [id, fetchPost]);
 
   const handleCommentAdded = () => {
     setCommentsUpdated(!commentsUpdated); // Toggle state to trigger re-fetch in CommentList

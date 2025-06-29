@@ -30,7 +30,7 @@ export default function CommentList({ postId, commentsUpdated }: CommentListProp
       }
       const data = await response.json();
       setComments(data);
-    } catch (err: any) { // Reverted to 'any' due to TypeScript strict mode
+    } catch (err: unknown) {
       setError((err as Error).message || 'Failed to fetch comments.');
     } finally {
       setLoading(false);
@@ -39,7 +39,7 @@ export default function CommentList({ postId, commentsUpdated }: CommentListProp
 
   useEffect(() => {
     fetchComments();
-  }, [postId, commentsUpdated]); // Re-fetch when postId changes or commentsUpdated is true
+  }, [postId, commentsUpdated, fetchComments]); // Re-fetch when postId changes or commentsUpdated is true
 
   if (loading) {
     return <div>Loading comments...</div>;

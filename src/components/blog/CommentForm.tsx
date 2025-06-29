@@ -41,7 +41,7 @@ export default function CommentForm({ postId, onCommentAdded }: CommentFormProps
       setAuthor('');
       setText('');
       onCommentAdded(); // Notify parent component to refresh comments
-    } catch (err: any) { // Reverted to 'any' due to TypeScript strict mode
+    } catch (err: unknown) {
       setError((err as Error).message || 'An unexpected error occurred.');
     } finally {
       setIsSubmitting(false);

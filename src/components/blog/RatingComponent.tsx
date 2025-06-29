@@ -27,7 +27,7 @@ export default function RatingComponent({ postId }: RatingComponentProps) {
       const data = await response.json();
       setAverageRating(data.averageRating);
       setTotalRatings(data.totalRatings);
-    } catch (err: any) { // Reverted to 'any' due to TypeScript strict mode
+    } catch (err: unknown) {
       setError((err as Error).message || 'Failed to fetch ratings.');
     } finally {
       setLoading(false);
@@ -36,7 +36,7 @@ export default function RatingComponent({ postId }: RatingComponentProps) {
 
   useEffect(() => {
     fetchRatings();
-  }, [postId]);
+  }, [postId, fetchRatings]);
 
   const handleRatingClick = async (score: number) => {
     // For simplicity, assuming a static userId for now. In a real app, this would come from auth.
@@ -61,7 +61,7 @@ export default function RatingComponent({ postId }: RatingComponentProps) {
       setUserRating(score);
       setMessage('Your rating has been submitted!');
       fetchRatings(); // Re-fetch to update average rating
-    } catch (err: any) { // Reverted to 'any' due to TypeScript strict mode
+    } catch (err: unknown) {
       setError((err as Error).message || 'An unexpected error occurred.');
     }
   };
