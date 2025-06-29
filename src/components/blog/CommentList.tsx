@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 
 interface CommentType {
   _id: string;
@@ -20,7 +20,7 @@ export default function CommentList({ postId, commentsUpdated }: CommentListProp
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
-  const fetchComments = async () => {
+  const fetchComments = useCallback(async () => {
     setLoading(true);
     setError('');
     try {
@@ -35,7 +35,7 @@ export default function CommentList({ postId, commentsUpdated }: CommentListProp
     } finally {
       setLoading(false);
     }
-  };
+  }, [postId]);
 
   useEffect(() => {
     fetchComments();

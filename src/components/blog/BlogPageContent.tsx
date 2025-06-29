@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { useLocale } from 'next-intl';
 import CommentForm from './CommentForm';
@@ -34,7 +34,7 @@ export default function BlogPageContent({ id }: BlogPageContentProps) {
   const [post, setPost] = useState<BlogPostType | null>(null);
   const [commentsUpdated, setCommentsUpdated] = useState(false); // State to trigger comment list refresh
 
-  const fetchPost = async () => {
+  const fetchPost = useCallback(async () => {
     try {
       const response = await fetch(`/api/blog/${id}`);
       if (!response.ok) {
@@ -46,7 +46,7 @@ export default function BlogPageContent({ id }: BlogPageContentProps) {
       console.error("Could not fetch blog post:", error);
       setPost(null);
     }
-  };
+  }, [id]);
 
   useEffect(() => {
     fetchPost();
